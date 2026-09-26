@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Categories — SaveMore</title>
+  <meta
+    name="description"
+    content="Browse SaveMore categories and discover deals and coupons across fashion, electronics, beauty, travel, food and more."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================
+       CATEGORIES PAGE
+    ========================================== */
+
+    .category-hero {
+      padding: 65px 0;
+      background:
+        linear-gradient(
+          135deg,
+          #effdf5,
+          #ffffff 55%,
+          #eff6ff
+        );
+      border-bottom: 1px solid var(--border);
+    }
+
+    .category-hero-content {
+      max-width: 760px;
+    }
+
+    .category-hero h1 {
+      margin-bottom: 12px;
+      color: var(--dark);
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .category-hero h1 span {
+      color: var(--primary);
+    }
+
+    .category-hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .categories-page {
+      padding: 60px 0 90px;
+      background: var(--light);
+    }
+
+    /* Search */
+
+    .category-search-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+    }
+
+    .category-search {
+      width: 100%;
+      max-width: 650px;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 6px 8px 6px 16px;
+
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .category-search-icon {
+      color: var(--muted);
+    }
+
+    .category-search input {
+      width: 100%;
+      height: 42px;
+
+      border: 0;
+      outline: 0;
+      background: transparent;
+
+      color: var(--dark);
+      font-size: 13px;
+    }
+
+    .category-search button {
+      width: 42px;
+      height: 42px;
+
+      flex-shrink: 0;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: var(--primary);
+      color: var(--white);
+
+      cursor: pointer;
+    }
+
+    /* Header */
+
+    .category-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .category-heading h2 {
+      color: var(--dark);
+      font-size: 24px;
+    }
+
+    .category-heading span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Grid */
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    /* Card */
+
+    .category-card {
+      position: relative;
+
+      padding: 24px;
+
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      box-shadow: var(--shadow-sm);
+
+      text-decoration: none;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: #bbf7d0;
+      box-shadow: var(--shadow);
+    }
+
+    .category-card.hidden {
+      display: none;
+    }
+
+    .category-icon {
+      width: 62px;
+      height: 62px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 18px;
+
+      border-radius: 14px;
+
+      background: #f0fdf4;
+
+      font-size: 30px;
+    }
+
+    .category-card h3 {
+      margin-bottom: 7px;
+
+      color: var(--dark);
+      font-size: 17px;
+    }
+
+    .category-card p {
+      min-height: 40px;
+      margin-bottom: 18px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .category-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding-top: 13px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .category-meta strong {
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .category-meta span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .category-arrow {
+      position: absolute;
+
+      top: 25px;
+      right: 22px;
+
+      color: var(--muted);
+      font-size: 18px;
+
+      transition:
+        transform .2s ease,
+        color .2s ease;
+    }
+
+    .category-card:hover .category-arrow {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    /* Featured categories */
+
+    .featured-categories {
+      margin-top: 55px;
+    }
+
+    .featured-title {
+      margin-bottom: 20px;
+      color: var(--dark);
+      font-size: 24px;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .featured-card {
+      min-height: 170px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      padding: 24px;
+
+      border-radius: 12px;
+
+      color: var(--white);
+      text-decoration: none;
+
+      overflow: hidden;
+      position: relative;
+    }
+
+    .featured-card::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.65),
+          rgba(0,0,0,.05)
+        );
+    }
+
+    .featured-card-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .featured-card h3 {
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+
+    .featured-card p {
+      font-size: 11px;
+      opacity: .9;
+    }
+
+    .fashion-bg {
+      background:
+        linear-gradient(135deg, #db2777, #7c3aed);
+    }
+
+    .electronics-bg {
+      background:
+        linear-gradient(135deg, #2563eb, #0891b2);
+    }
+
+    .home-bg {
+      background:
+        linear-gradient(135deg, #ea580c, #ca8a04);
+    }
+
+    /* No result */
+
+    .category-no-results {
+      display: none;
+
+      padding: 70px 20px;
+
+      text-align: center;
+    }
+
+    .category-no-results.show {
+      display: block;
+    }
+
+    .category-no-results .icon {
+      margin-bottom: 15px;
+      font-size: 50px;
+    }
+
+    .category-no-results h3 {
+      margin-bottom: 7px;
+      color: var(--dark);
+      font-size: 22px;
+    }
+
+    .category-no-results p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 1000px) {
+      .categories-grid {
+        grid-template-columns:
+          repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .categories-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .category-hero {
+        padding: 50px 0;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header class="header">
+
+    <div class="container header-container">
+
+      <a href="index.html" class="logo">
+        Save<span>More</span>
+      </a>
+
+      <nav class="navbar">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html" class="active">
+          Categories
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          class="search-btn"
+          type="button"
+          aria-label="Search"
+        >
+          🔍
+        </button>
+
+        <a
+          href="favorites.html"
+          class="favorites-btn"
+          aria-label="Favorites"
+        >
+          ♡
+        </a>
+
+        <button
+          class="menu-btn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main>
+
+    <!-- Hero -->
+
+    <section class="category-hero">
+
+      <div class="container">
+
+        <div class="category-hero-content">
+
+          <span class="section-label">
+            Explore Categories
+          </span>
+
+          <h1>
+            Shop by
+            <span>Category</span>
+          </h1>
+
+          <p>
+            Explore deals and coupons from
+            different categories. Find exactly
+            what you need and save more.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Categories -->
+
+    <section class="categories-page">
+
+      <div class="container">
+
+        <!-- Search -->
+
+        <div class="category-search-wrap">
+
+          <form
+            class="category-search"
+            id="categorySearchForm"
+          >
+
+            <span class="category-search-icon">
+              🔎
+            </span>
+
+            <input
+              type="search"
+              id="categorySearch"
+              placeholder="Search categories..."
+              autocomplete="off"
+            >
+
+            <button
+              type="submit"
+              aria-label="Search categories"
+            >
+              →
+            </button>
+
+          </form>
+
+        </div>
+
+
+        <!-- Heading -->
+
+        <div class="category-heading">
+
+          <h2>
+            All Categories
+          </h2>
+
+          <span id="categoryCount">
+            12 categories
+          </span>
+
+        </div>
+
+
+        <!-- Category Grid -->
+
+        <div
+          class="categories-grid"
+          id="categoriesGrid"
+        >
+
+          <!-- Fashion -->
+
+          <a
+            href="deals.html?category=fashion"
+            class="category-card"
+            data-category="fashion"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              👕
+            </div>
+
+            <h3>
+              Fashion
+            </h3>
+
+            <p>
+              Clothing, shoes, accessories
+              and the latest fashion deals.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                125+ Deals
+              </strong>
+
+              <span>
+                48 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Electronics -->
+
+          <a
+            href="deals.html?category=electronics"
+            class="category-card"
+            data-category="electronics"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              💻
+            </div>
+
+            <h3>
+              Electronics
+            </h3>
+
+            <p>
+              Laptops, phones, gadgets and
+              electronics accessories.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                180+ Deals
+              </strong>
+
+              <span>
+                55 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Beauty -->
+
+          <a
+            href="deals.html?category=beauty"
+            class="category-card"
+            data-category="beauty"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              💄
+            </div>
+
+            <h3>
+              Beauty
+            </h3>
+
+            <p>
+              Makeup, skincare, haircare
+              and personal care offers.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                95+ Deals
+              </strong>
+
+              <span>
+                36 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Home -->
+
+          <a
+            href="deals.html?category=home"
+            class="category-card"
+            data-category="home"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🏠
+            </div>
+
+            <h3>
+              Home & Kitchen
+            </h3>
+
+            <p>
+              Furniture, kitchen items,
+              decor and home essentials.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                110+ Deals
+              </strong>
+
+              <span>
+                42 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Food -->
+
+          <a
+            href="deals.html?category=food"
+            class="category-card"
+            data-category="food"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🍔
+            </div>
+
+            <h3>
+              Food & Dining
+            </h3>
+
+            <p>
+              Restaurants, food delivery
+              and dining discounts.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                85+ Deals
+              </strong>
+
+              <span>
+                29 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Travel -->
+
+          <a
+            href="deals.html?category=travel"
+            class="category-card"
+            data-category="travel"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              ✈️
+            </div>
+
+            <h3>
+              Travel
+            </h3>
+
+            <p>
+              Flights, hotels, holidays
+              and travel packages.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                72+ Deals
+              </strong>
+
+              <span>
+                24 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Sports -->
+
+          <a
+            href="deals.html?category=sports"
+            class="category-card"
+            data-category="sports"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🏆
+            </div>
+
+            <h3>
+              Sports & Fitness
+            </h3>
+
+            <p>
+              Sportswear, gym equipment
+              and fitness products.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                65+ Deals
+              </strong>
+
+              <span>
+                22 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Health -->
+
+          <a
+            href="deals.html?category=health"
+            class="category-card"
+            data-category="health"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              ❤️
+            </div>
+
+            <h3>
+              Health
+            </h3>
+
+            <p>
+              Health, wellness and
+              everyday care products.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                58+ Deals
+              </strong>
+
+              <span>
+                19 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Grocery -->
+
+          <a
+            href="deals.html?category=grocery"
+            class="category-card"
+            data-category="grocery"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🛒
+            </div>
+
+            <h3>
+              Grocery
+            </h3>
+
+            <p>
+              Grocery essentials, food and
+              household shopping deals.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                90+ Deals
+              </strong>
+
+              <span>
+                31 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Kids -->
+
+          <a
+            href="deals.html?category=kids"
+            class="category-card"
+            data-category="kids"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🧸
+            </div>
+
+            <h3>
+              Kids & Toys
+            </h3>
+
+            <p>
+              Toys, games, kids clothing
+              and children's products.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                47+ Deals
+              </strong>
+
+              <span>
+                17 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Automotive -->
+
+          <a
+            href="deals.html?category=automotive"
+            class="category-card"
+            data-category="automotive"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              🚗
+            </div>
+
+            <h3>
+              Automotive
+            </h3>
+
+            <p>
+              Car accessories, parts and
+              automotive products.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                39+ Deals
+              </strong>
+
+              <span>
+                15 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <!-- Services -->
+
+          <a
+            href="deals.html?category=services"
+            class="category-card"
+            data-category="services"
+          >
+
+            <span class="category-arrow">
+              →
+            </span>
+
+            <div class="category-icon">
+              💼
+            </div>
+
+            <h3>
+              Services
+            </h3>
+
+            <p>
+              Online services, subscriptions
+              and useful digital offers.
+            </p>
+
+            <div class="category-meta">
+
+              <strong>
+                52+ Deals
+              </strong>
+
+              <span>
+                21 Stores
+              </span>
+
+            </div>
+
+          </a>
+
+        </div>
+
+
+        <!-- No Results -->
+
+        <div
+          class="category-no-results"
+          id="categoryNoResults"
+        >
+
+          <div class="icon">
+            🔎
+          </div>
+
+          <h3>
+            No category found
+          </h3>
+
+          <p>
+            Try searching for another category.
+          </p>
+
+        </div>
+
+
+        <!-- Featured -->
+
+        <div class="featured-categories">
+
+          <h2 class="featured-title">
+            Popular Categories
+          </h2>
+
+          <div class="featured-grid">
+
+            <a
+              href="deals.html?category=fashion"
+              class="featured-card fashion-bg"
+            >
+
+              <div class="featured-card-content">
+
+                <h3>
+                  Fashion Deals
+                </h3>
+
+                <p>
+                  Save on clothing, shoes
+                  and accessories.
+                </p>
+
+              </div>
+
+            </a>
+
+
+            <a
+              href="deals.html?category=electronics"
+              class="featured-card electronics-bg"
+            >
+
+              <div class="featured-card-content">
+
+                <h3>
+                  Electronics Deals
+                </h3>
+
+                <p>
+                  Discover deals on gadgets
+                  and electronics.
+                </p>
+
+              </div>
+
+            </a>
+
+
+            <a
+              href="deals.html?category=home"
+              class="featured-card home-bg"
+            >
+
+              <div class="featured-card-content">
+
+                <h3>
+                  Home Deals
+                </h3>
+
+                <p>
+                  Find offers for your
+                  home and kitchen.
+                </p>
+
+              </div>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+          Save<span>More</span>
+        </a>
+
+        <p>
+          Discover the best deals, coupons,
+          discounts and offers — all in one place.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Facebook">
+            f
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            ◎
+          </a>
+
+          <a href="#" aria-label="X">
+            𝕏
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Explore
+        </h3>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Company
+        </h3>
+
+        <a href="about.html">
+          About Us
+        </a>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+        <a href="favorites.html">
+          Favorites
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Legal
+        </h3>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <p>
+        ©
+        <span id="currentYear"></span>
+        SaveMore. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================
+       PAGE JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const cards =
+          Array.from(
+            document.querySelectorAll(
+              ".category-card"
+            )
+          );
+
+        const search =
+          document.getElementById(
+            "categorySearch"
+          );
+
+        const form =
+          document.getElementById(
+            "categorySearchForm"
+          );
+
+        const count =
+          document.getElementById(
+            "categoryCount"
+          );
+
+        const noResults =
+          document.getElementById(
+            "categoryNoResults"
+          );
+
+
+        function filterCategories() {
+
+          const term =
+            search.value
+              .trim()
+              .toLowerCase();
+
+          let visible = 0;
+
+
+          cards.forEach(
+            function (card) {
+
+              const text =
+                card.textContent
+                  .toLowerCase();
+
+              const matches =
+                !term ||
+                text.includes(term);
+
+
+              if (matches) {
+
+                card.classList.remove(
+                  "hidden"
+                );
+
+                visible++;
+
+              } else {
+
+                card.classList.add(
+                  "hidden"
+                );
+
+              }
+
+            }
+          );
+
+
+          count.textContent =
+            visible +
+            " categor" +
+            (visible === 1
+              ? "y"
+              : "ies");
+
+
+          noResults.classList.toggle(
+            "show",
+            visible === 0
+          );
+
+        }
+
+
+        search.addEventListener(
+          "input",
+          filterCategories
+        );
+
+
+        form.addEventListener(
+          "submit",
+          function (event) {
+
+            event.preventDefault();
+
+            filterCategories();
+
+          }
+        );
+
+
+        const year =
+          document.getElementById(
+            "currentYear"
+          );
+
+        if (year) {
+          year.textContent =
+            new Date().getFullYear();
+        }
+
+      }
+    );
+
+  </script>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
