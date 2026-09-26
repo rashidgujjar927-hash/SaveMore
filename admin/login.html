@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Login — SaveMore</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --dark: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --light: #f8fafc;
+      --danger: #dc2626;
+      --white: #ffffff;
+    }
+
+    body {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(34, 197, 94, .12),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 85% 85%,
+          rgba(22, 163, 74, .08),
+          transparent 30%
+        ),
+        #f8fafc;
+
+      color: var(--text);
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    /* =========================
+       LOGIN WRAPPER
+    ========================== */
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 410px;
+    }
+
+    /* =========================
+       BRAND
+    ========================== */
+
+    .brand {
+      margin-bottom: 22px;
+
+      text-align: center;
+    }
+
+    .brand a {
+      color: var(--dark);
+
+      font-size: 29px;
+      font-weight: 850;
+
+      letter-spacing: -1.5px;
+
+      text-decoration: none;
+    }
+
+    .brand a span {
+      color: var(--green);
+    }
+
+    .brand p {
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    /* =========================
+       LOGIN CARD
+    ========================== */
+
+    .login-card {
+      overflow: hidden;
+
+      background: var(--white);
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 15px 40px rgba(15, 23, 42, .07);
+    }
+
+    .card-top {
+      padding: 25px 25px 20px;
+
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card-top h1 {
+      color: var(--dark);
+
+      font-size: 19px;
+      font-weight: 750;
+    }
+
+    .card-top p {
+      margin-top: 6px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .login-form {
+      padding: 25px;
+    }
+
+    /* =========================
+       FORM
+    ========================== */
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--dark);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+
+      top: 50%;
+      left: 12px;
+
+      transform: translateY(-50%);
+
+      color: #94a3b8;
+
+      font-size: 13px;
+
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 43px;
+
+      padding:
+        0 12px 0 37px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      outline: none;
+
+      background: white;
+
+      color: var(--dark);
+
+      font-size: 10px;
+
+      transition: .2s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 3px rgba(22, 163, 74, .08);
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      top: 50%;
+      right: 10px;
+
+      width: 28px;
+      height: 28px;
+
+      transform: translateY(-50%);
+
+      border: 0;
+
+      background: transparent;
+
+      color: #64748b;
+
+      cursor: pointer;
+
+      font-size: 12px;
+    }
+
+    /* =========================
+       OPTIONS
+    ========================== */
+
+    .form-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin: 2px 0 18px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+
+      gap: 6px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      cursor: pointer;
+    }
+
+    .remember input {
+      width: 13px;
+      height: 13px;
+
+      accent-color: var(--green);
+
+      cursor: pointer;
+    }
+
+    .forgot {
+      border: 0;
+
+      background: transparent;
+
+      color: var(--green);
+
+      font-size: 8px;
+      font-weight: 650;
+
+      cursor: pointer;
+    }
+
+    .forgot:hover {
+      color: var(--green-dark);
+      text-decoration: underline;
+    }
+
+    /* =========================
+       LOGIN BUTTON
+    ========================== */
+
+    .login-button {
+      width: 100%;
+      height: 43px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      border: 0;
+
+      border-radius: 7px;
+
+      background: var(--green);
+
+      color: white;
+
+      font-size: 10px;
+      font-weight: 750;
+
+      cursor: pointer;
+
+      transition: .2s ease;
+    }
+
+    .login-button:hover {
+      background: var(--green-dark);
+    }
+
+    .login-button:disabled {
+      opacity: .7;
+      cursor: not-allowed;
+    }
+
+    /* =========================
+       ERROR
+    ========================== */
+
+    .error-message {
+      display: none;
+
+      margin-bottom: 15px;
+
+      padding: 10px 11px;
+
+      border: 1px solid #fecaca;
+
+      border-radius: 6px;
+
+      background: #fef2f2;
+
+      color: var(--danger);
+
+      font-size: 8px;
+
+      line-height: 1.5;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* =========================
+       SUCCESS
+    ========================== */
+
+    .success-message {
+      display: none;
+
+      margin-bottom: 15px;
+
+      padding: 10px 11px;
+
+      border: 1px solid #bbf7d0;
+
+      border-radius: 6px;
+
+      background: #f0fdf4;
+
+      color: var(--green-dark);
+
+      font-size: 8px;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* =========================
+       DEMO CREDENTIALS
+    ========================== */
+
+    .demo-box {
+      margin-top: 18px;
+
+      padding: 12px;
+
+      border: 1px dashed #cbd5e1;
+
+      border-radius: 7px;
+
+      background: #f8fafc;
+    }
+
+    .demo-box-title {
+      margin-bottom: 7px;
+
+      color: var(--dark);
+
+      font-size: 8px;
+      font-weight: 750;
+    }
+
+    .credential-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .credential-row strong {
+      color: var(--text);
+
+      font-weight: 650;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .login-footer {
+      padding: 15px 25px;
+
+      border-top: 1px solid #f1f5f9;
+
+      text-align: center;
+    }
+
+    .login-footer p {
+      color: #94a3b8;
+
+      font-size: 8px;
+    }
+
+    .login-footer a {
+      color: var(--green);
+
+      text-decoration: none;
+    }
+
+    /* =========================
+       BACK WEBSITE
+    ========================== */
+
+    .back-website {
+      display: block;
+
+      margin-top: 18px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      text-align: center;
+
+      text-decoration: none;
+    }
+
+    .back-website:hover {
+      color: var(--green);
+    }
+
+    /* =========================
+       LOADING
+    ========================== */
+
+    .spinner {
+      width: 13px;
+      height: 13px;
+
+      border: 2px solid rgba(255,255,255,.4);
+
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      animation:
+        spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 480px) {
+
+      body {
+        padding: 15px;
+      }
+
+      .card-top {
+        padding: 22px 20px 18px;
+      }
+
+      .login-form {
+        padding: 20px;
+      }
+
+      .login-footer {
+        padding: 14px 20px;
+      }
+
+      .brand a {
+        font-size: 26px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="login-wrapper">
+
+
+    <!-- =========================
+         BRAND
+    ========================== -->
+
+    <div class="brand">
+
+      <a href="../index.html">
+        Save<span>More</span>
+      </a>
+
+      <p>
+        Admin Management Panel
+      </p>
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN CARD
+    ========================== -->
+
+    <div class="login-card">
+
+
+      <div class="card-top">
+
+        <h1>
+          Welcome Back
+        </h1>
+
+        <p>
+          Sign in to manage deals, coupons,
+          stores, categories and users.
+        </p>
+
+      </div>
+
+
+      <form
+        class="login-form"
+        id="loginForm"
+      >
+
+
+        <!-- ERROR -->
+
+        <div
+          class="error-message"
+          id="errorMessage"
+        >
+          Invalid admin ID or password.
+        </div>
+
+
+        <!-- SUCCESS -->
+
+        <div
+          class="success-message"
+          id="successMessage"
+        >
+          Login successful. Redirecting...
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+          <label for="adminId">
+            Admin ID
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              ✉
+            </span>
+
+            <input
+              class="form-input"
+              id="adminId"
+              type="email"
+              placeholder="admin@savemore.com"
+              autocomplete="username"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="adminPassword">
+            Password
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              🔒
+            </span>
+
+            <input
+              class="form-input"
+              id="adminPassword"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              class="password-toggle"
+              id="passwordToggle"
+              type="button"
+              aria-label="Show password"
+            >
+              👁
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+
+        <div class="form-options">
+
+          <label class="remember">
+
+            <input
+              id="rememberMe"
+              type="checkbox"
+            >
+
+            Remember me
+
+          </label>
+
+
+          <button
+            class="forgot"
+            id="forgotPassword"
+            type="button"
+          >
+            Forgot password?
+          </button>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <button
+          class="login-button"
+          id="loginButton"
+          type="submit"
+        >
+
+          <span id="loginButtonText">
+            Sign In
+          </span>
+
+        </button>
+
+
+        <!-- DEMO CREDENTIALS -->
+
+        <div class="demo-box">
+
+          <div class="demo-box-title">
+            Temporary Admin Credentials
+          </div>
+
+          <div class="credential-row">
+
+            <span>
+              Admin ID
+            </span>
+
+            <strong>
+              admin@savemore.com
+            </strong>
+
+          </div>
+
+          <div class="credential-row">
+
+            <span>
+              Password
+            </span>
+
+            <strong>
+              SaveMore@2026
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </form>
+
+
+      <!-- FOOTER -->
+
+      <div class="login-footer">
+
+        <p>
+          SaveMore Admin Panel
+          ·
+          <a href="../index.html">
+            Public Website
+          </a>
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <a
+      href="../index.html"
+      class="back-website"
+    >
+      ← Back to SaveMore Website
+    </a>
+
+
+  </div>
+
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+
+        /* =========================
+           TEMPORARY CREDENTIALS
+        ========================== */
+
+        const ADMIN_ID =
+          "admin@savemore.com";
+
+        const ADMIN_PASSWORD =
+          "SaveMore@2026";
+
+
+        /* =========================
+           ELEMENTS
+        ========================== */
+
+        const loginForm =
+          document.getElementById(
+            "loginForm"
+          );
+
+        const adminId =
+          document.getElementById(
+            "adminId"
+          );
+
+        const adminPassword =
+          document.getElementById(
+            "adminPassword"
+          );
+
+        const loginButton =
+          document.getElementById(
+            "loginButton"
+          );
+
+        const loginButtonText =
+          document.getElementById(
+            "loginButtonText"
+          );
+
+        const errorMessage =
+          document.getElementById(
+            "errorMessage"
+          );
+
+        const successMessage =
+          document.getElementById(
+            "successMessage"
+          );
+
+        const passwordToggle =
+          document.getElementById(
+            "passwordToggle"
+          );
+
+        const rememberMe =
+          document.getElementById(
+            "rememberMe"
+          );
+
+        const forgotPassword =
+          document.getElementById(
+            "forgotPassword"
+          );
+
+
+        /* =========================
+           CHECK EXISTING LOGIN
+        ========================== */
+
+        const loggedIn =
+          localStorage.getItem(
+            "savemore_admin_logged_in"
+          );
+
+
+        if (loggedIn === "true") {
+
+          window.location.href =
+            "dashboard.html";
+
+          return;
+
+        }
+
+
+        /* =========================
+           REMEMBERED ID
+        ========================== */
+
+        const rememberedId =
+          localStorage.getItem(
+            "savemore_admin_id"
+          );
+
+
+        if (rememberedId) {
+
+          adminId.value =
+            rememberedId;
+
+          rememberMe.checked =
+            true;
+
+        }
+
+
+        /* =========================
+           SHOW / HIDE PASSWORD
+        ========================== */
+
+        passwordToggle.addEventListener(
+          "click",
+          function () {
+
+            if (
+              adminPassword.type ===
+              "password"
+            ) {
+
+              adminPassword.type =
+                "text";
+
+              passwordToggle.textContent =
+                "🙈";
+
+              passwordToggle.setAttribute(
+                "aria-label",
+                "Hide password"
+              );
+
+            } else {
+
+              adminPassword.type =
+                "password";
+
+              passwordToggle.textContent =
+                "👁";
+
+              passwordToggle.setAttribute(
+                "aria-label",
+                "Show password"
+              );
+
+            }
+
+          }
+        );
+
+
+        /* =========================
+           LOGIN
+        ========================== */
+
+        loginForm.addEventListener(
+          "submit",
+          function (event) {
+
+            event.preventDefault();
+
+
+            errorMessage.classList.remove(
+              "show"
+            );
+
+            successMessage.classList.remove(
+              "show"
+            );
+
+
+            const enteredId =
+              adminId.value.trim();
+
+            const enteredPassword =
+              adminPassword.value;
+
+
+            /* =========================
+               VALIDATE
+            ========================== */
+
+            if (
+              enteredId === ADMIN_ID &&
+              enteredPassword ===
+                ADMIN_PASSWORD
+            ) {
+
+
+              /* Remember ID */
+
+              if (rememberMe.checked) {
+
+                localStorage.setItem(
+                  "savemore_admin_id",
+                  enteredId
+                );
+
+              } else {
+
+                localStorage.removeItem(
+                  "savemore_admin_id"
+                );
+
+              }
+
+
+              /* Login state */
+
+              localStorage.setItem(
+                "savemore_admin_logged_in",
+                "true"
+              );
+
+
+              /* Admin session timestamp */
+
+              localStorage.setItem(
+                "savemore_admin_login_time",
+                Date.now().toString()
+              );
+
+
+              /* Loading state */
+
+              loginButton.disabled =
+                true;
+
+              loginButtonText.innerHTML =
+                '<span class="spinner"></span> Signing in...';
+
+
+              successMessage.classList.add(
+                "show"
+              );
+
+
+              /* Redirect */
+
+              setTimeout(
+                function () {
+
+                  window.location.href =
+                    "dashboard.html";
+
+                },
+                800
+              );
+
+
+            } else {
+
+
+              /* Invalid login */
+
+              errorMessage.classList.add(
+                "show"
+              );
+
+
+              adminPassword.value = "";
+
+              adminPassword.focus();
+
+
+            }
+
+          }
+        );
+
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
+
+        forgotPassword.addEventListener(
+          "click",
+          function () {
+
+            alert(
+              "Password recovery will be connected to the backend/database in the next step."
+            );
+
+          }
+        );
+
+
+        /* =========================
+           REMOVE ERROR ON INPUT
+        ========================== */
+
+        adminId.addEventListener(
+          "input",
+          function () {
+
+            errorMessage.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+
+        adminPassword.addEventListener(
+          "input",
+          function () {
+
+            errorMessage.classList.remove(
+              "show"
+            );
+
+          }
+        );
+
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
