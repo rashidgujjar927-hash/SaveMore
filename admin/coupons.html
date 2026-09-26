@@ -1,0 +1,2917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Coupons — SaveMore Admin</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --dark: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --danger: #dc2626;
+      --warning: #d97706;
+      --blue: #2563eb;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--light);
+      color: var(--text);
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
+
+    /* =========================
+       LAYOUT
+    ========================== */
+
+    .admin-layout {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================== */
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+
+      width: 245px;
+
+      display: flex;
+      flex-direction: column;
+
+      background: var(--dark);
+      color: white;
+
+      z-index: 100;
+
+      transition: transform .25s ease;
+    }
+
+    .sidebar-brand {
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 22px;
+
+      border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+    }
+
+    .sidebar-brand a {
+      color: white;
+
+      font-size: 22px;
+      font-weight: 800;
+
+      letter-spacing: -1px;
+    }
+
+    .sidebar-brand span {
+      color: #4ade80;
+    }
+
+    .sidebar-brand small {
+      margin-left: 8px;
+
+      color: #94a3b8;
+
+      font-size: 8px;
+      font-weight: 600;
+
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+
+      padding: 20px 12px;
+
+      overflow-y: auto;
+    }
+
+    .nav-heading {
+      padding: 0 11px;
+
+      margin: 8px 0 8px;
+
+      color: #64748b;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      letter-spacing: .8px;
+
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      min-height: 42px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+
+      margin-bottom: 3px;
+
+      padding: 0 11px;
+
+      border-radius: 7px;
+
+      color: #94a3b8;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      transition: .2s ease;
+    }
+
+    .nav-link:hover {
+      background:
+        rgba(255,255,255,.06);
+
+      color: white;
+    }
+
+    .nav-link.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .nav-icon {
+      width: 22px;
+
+      text-align: center;
+
+      font-size: 15px;
+    }
+
+    .sidebar-footer {
+      padding: 15px 12px;
+
+      border-top:
+        1px solid
+        rgba(255,255,255,.08);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 9px;
+
+      border-radius: 8px;
+
+      background:
+        rgba(255,255,255,.05);
+    }
+
+    .admin-avatar {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #22c55e;
+
+      color: white;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .admin-profile strong {
+      display: block;
+
+      margin-bottom: 2px;
+
+      color: white;
+
+      font-size: 10px;
+    }
+
+    .admin-profile span {
+      color: #94a3b8;
+
+      font-size: 8px;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    .main-content {
+      width: calc(100% - 245px);
+
+      margin-left: 245px;
+    }
+
+    /* =========================
+       TOPBAR
+    ========================== */
+
+    .topbar {
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 28px;
+
+      position: sticky;
+      top: 0;
+
+      background: white;
+
+      border-bottom:
+        1px solid var(--border);
+
+      z-index: 50;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+    }
+
+    .mobile-menu {
+      display: none;
+
+      width: 35px;
+      height: 35px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      background: white;
+
+      cursor: pointer;
+    }
+
+    .page-title h1 {
+      color: var(--dark);
+
+      font-size: 20px;
+    }
+
+    .page-title p {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .view-site {
+      height: 35px;
+
+      display: inline-flex;
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 0 12px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      color: var(--text);
+
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .notification-btn {
+      position: relative;
+
+      width: 35px;
+      height: 35px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      background: white;
+
+      cursor: pointer;
+    }
+
+    .notification-dot {
+      position: absolute;
+
+      top: 7px;
+      right: 7px;
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--danger);
+    }
+
+    /* =========================
+       CONTENT
+    ========================== */
+
+    .page-content {
+      padding: 28px;
+    }
+
+    .page-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 20px;
+    }
+
+    .page-actions h2 {
+      color: var(--dark);
+
+      font-size: 17px;
+    }
+
+    .page-actions p {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .primary-btn {
+      min-height: 38px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 6px;
+
+      padding: 0 15px;
+
+      border: 0;
+
+      border-radius: 7px;
+
+      background: var(--primary);
+
+      color: white;
+
+      font-size: 10px;
+      font-weight: 750;
+
+      cursor: pointer;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* =========================
+       STATS
+    ========================== */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 12px;
+
+      margin-bottom: 18px;
+    }
+
+    .stat-card {
+      padding: 15px;
+
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
+    }
+
+    .stat-card span {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+    }
+
+    .stat-card strong {
+      color: var(--dark);
+
+      font-size: 20px;
+    }
+
+    .stat-card.green strong {
+      color: var(--primary);
+    }
+
+    .stat-card.orange strong {
+      color: var(--warning);
+    }
+
+    .stat-card.red strong {
+      color: var(--danger);
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================== */
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 15px;
+
+      margin-bottom: 15px;
+
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
+    }
+
+    .search-box {
+      position: relative;
+
+      flex: 1;
+
+      max-width: 380px;
+    }
+
+    .search-box span {
+      position: absolute;
+
+      left: 12px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--muted);
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 38px;
+
+      padding:
+        0 12px 0 35px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      outline: none;
+
+      font-size: 10px;
+    }
+
+    .search-box input:focus,
+    .filter-select:focus {
+      border-color: var(--primary);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(22,163,74,.08);
+    }
+
+    .filter-select {
+      height: 38px;
+
+      min-width: 135px;
+
+      padding: 0 10px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      background: white;
+
+      outline: none;
+
+      color: var(--text);
+
+      font-size: 10px;
+    }
+
+    /* =========================
+       TABLE
+    ========================== */
+
+    .table-card {
+      overflow: hidden;
+
+      background: white;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    .coupons-table {
+      width: 100%;
+
+      min-width: 950px;
+
+      border-collapse: collapse;
+    }
+
+    .coupons-table th {
+      padding: 12px 15px;
+
+      background: #f8fafc;
+
+      border-bottom:
+        1px solid var(--border);
+
+      color: var(--muted);
+
+      text-align: left;
+
+      font-size: 8px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+    }
+
+    .coupons-table td {
+      padding: 13px 15px;
+
+      border-bottom:
+        1px solid #f1f5f9;
+
+      font-size: 9px;
+    }
+
+    .coupons-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .coupon-info {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .coupon-icon {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      flex-shrink: 0;
+
+      border-radius: 7px;
+
+      background: #ecfdf5;
+
+      font-size: 17px;
+    }
+
+    .coupon-info strong {
+      display: block;
+
+      margin-bottom: 3px;
+
+      color: var(--dark);
+
+      font-size: 10px;
+    }
+
+    .coupon-info span {
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .coupon-code {
+      display: inline-block;
+
+      padding: 6px 9px;
+
+      border:
+        1px dashed
+        #86efac;
+
+      border-radius: 5px;
+
+      background: #f0fdf4;
+
+      color: #15803d;
+
+      font-family: monospace;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: .5px;
+    }
+
+    .store-name {
+      color: var(--text);
+
+      font-weight: 650;
+    }
+
+    .discount {
+      color: var(--primary);
+
+      font-weight: 800;
+    }
+
+    .usage {
+      color: var(--text);
+
+      font-weight: 650;
+    }
+
+    .status {
+      display: inline-block;
+
+      padding: 5px 8px;
+
+      border-radius: 5px;
+
+      font-size: 7px;
+      font-weight: 750;
+    }
+
+    .status.active {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status.pending {
+      background: #fef3c7;
+      color: #a16207;
+    }
+
+    .status.expired {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+
+      gap: 5px;
+    }
+
+    .action-btn {
+      width: 30px;
+      height: 30px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 6px;
+
+      background: white;
+
+      cursor: pointer;
+    }
+
+    .action-btn.edit:hover {
+      background: #eff6ff;
+
+      border-color: #93c5fd;
+    }
+
+    .action-btn.delete:hover {
+      background: #fef2f2;
+
+      border-color: #fecaca;
+    }
+
+    /* =========================
+       TABLE FOOTER
+    ========================== */
+
+    .table-footer {
+      min-height: 55px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 15px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .table-info {
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 4px;
+    }
+
+    .page-btn {
+      width: 29px;
+      height: 29px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 5px;
+
+      background: white;
+
+      color: var(--text);
+
+      font-size: 8px;
+
+      cursor: pointer;
+    }
+
+    .page-btn.active {
+      background: var(--primary);
+
+      border-color: var(--primary);
+
+      color: white;
+    }
+
+    /* =========================
+       EMPTY STATE
+    ========================== */
+
+    .empty-state {
+      display: none;
+
+      padding: 50px 20px;
+
+      text-align: center;
+    }
+
+    .empty-state-icon {
+      margin-bottom: 10px;
+
+      font-size: 30px;
+    }
+
+    .empty-state h3 {
+      margin-bottom: 5px;
+
+      color: var(--dark);
+
+      font-size: 13px;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .modal-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(15,23,42,.55);
+
+      z-index: 300;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 650px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      background: white;
+
+      border-radius: 11px;
+
+      box-shadow:
+        0 25px 60px
+        rgba(15,23,42,.25);
+    }
+
+    .modal-header {
+      min-height: 58px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+    .modal-header h2 {
+      color: var(--dark);
+
+      font-size: 15px;
+    }
+
+    .modal-close {
+      width: 30px;
+      height: 30px;
+
+      border: 0;
+
+      border-radius: 6px;
+
+      background: #f1f5f9;
+
+      color: var(--muted);
+
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      color: var(--dark);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 6px;
+
+      outline: none;
+
+      color: var(--dark);
+
+      font-size: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+      height: 39px;
+
+      padding: 0 10px;
+
+      background: white;
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+
+      padding: 10px;
+
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(22,163,74,.08);
+    }
+
+    .modal-footer {
+      display: flex;
+
+      align-items: center;
+      justify-content: flex-end;
+
+      gap: 8px;
+
+      padding: 15px 20px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+    .secondary-btn {
+      min-height: 38px;
+
+      padding: 0 15px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 7px;
+
+      background: white;
+
+      color: var(--text);
+
+      font-size: 10px;
+      font-weight: 650;
+
+      cursor: pointer;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    .sidebar-overlay {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      background:
+        rgba(15,23,42,.45);
+
+      z-index: 90;
+    }
+
+    @media (max-width: 1000px) {
+
+      .stats {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+    }
+
+    @media (max-width: 800px) {
+
+      .sidebar {
+        transform:
+          translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform:
+          translateX(0);
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: block;
+      }
+
+      .view-site {
+        display: none;
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .page-content {
+        padding: 18px;
+      }
+
+      .page-actions {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search-box {
+        max-width: none;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .table-footer {
+        min-height: auto;
+
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 12px 15px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="admin-layout">
+
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+      <div class="sidebar-brand">
+
+        <a href="dashboard.html">
+          Save<span>More</span>
+        </a>
+
+        <small>
+          Admin
+        </small>
+
+      </div>
+
+
+      <nav class="sidebar-nav">
+
+        <div class="nav-heading">
+          Main
+        </div>
+
+        <a
+          href="dashboard.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">📊</span>
+          Dashboard
+        </a>
+
+
+        <div class="nav-heading">
+          Content
+        </div>
+
+        <a
+          href="deals.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">🔥</span>
+          Deals
+        </a>
+
+        <a
+          href="coupons.html"
+          class="nav-link active"
+        >
+          <span class="nav-icon">🎟️</span>
+          Coupons
+        </a>
+
+        <a
+          href="stores.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">🏪</span>
+          Stores
+        </a>
+
+        <a
+          href="categories.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">📁</span>
+          Categories
+        </a>
+
+
+        <div class="nav-heading">
+          Users
+        </div>
+
+        <a
+          href="users.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">👥</span>
+          Users
+        </a>
+
+        <a
+          href="messages.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">✉️</span>
+          Messages
+        </a>
+
+
+        <div class="nav-heading">
+          System
+        </div>
+
+        <a
+          href="settings.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">⚙️</span>
+          Settings
+        </a>
+
+        <a
+          href="../index.html"
+          class="nav-link"
+        >
+          <span class="nav-icon">🌐</span>
+          View Website
+        </a>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+
+        <div class="admin-profile">
+
+          <div class="admin-avatar">
+            A
+          </div>
+
+          <div>
+            <strong>
+              Administrator
+            </strong>
+
+            <span>
+              Super Admin
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+    <!-- ================================
+         MAIN
+    ================================= -->
+
+    <div class="main-content">
+
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            class="mobile-menu"
+            id="mobileMenu"
+            type="button"
+          >
+            ☰
+          </button>
+
+          <div class="page-title">
+
+            <h1>
+              Coupons
+            </h1>
+
+            <p>
+              Manage discount coupons and promo codes
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <a
+            href="../index.html"
+            class="view-site"
+          >
+            🌐 View Website
+          </a>
+
+          <button
+            class="notification-btn"
+            type="button"
+            id="notificationButton"
+          >
+            🔔
+
+            <span
+              class="notification-dot"
+            ></span>
+
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ================================
+           PAGE CONTENT
+      ================================= -->
+
+      <main class="page-content">
+
+
+        <!-- HEADER -->
+
+        <div class="page-actions">
+
+          <div>
+
+            <h2>
+              All Coupons
+            </h2>
+
+            <p>
+              Create and manage promotional coupon codes.
+            </p>
+
+          </div>
+
+          <button
+            class="primary-btn"
+            id="addCouponButton"
+            type="button"
+          >
+            + Add New Coupon
+          </button>
+
+        </div>
+
+
+        <!-- ================================
+             STATS
+        ================================= -->
+
+        <div class="stats">
+
+          <div class="stat-card">
+
+            <span>
+              Total Coupons
+            </span>
+
+            <strong id="totalCoupons">
+              24
+            </strong>
+
+          </div>
+
+
+          <div class="stat-card green">
+
+            <span>
+              Active Coupons
+            </span>
+
+            <strong id="activeCoupons">
+              16
+            </strong>
+
+          </div>
+
+
+          <div class="stat-card orange">
+
+            <span>
+              Pending
+            </span>
+
+            <strong id="pendingCoupons">
+              4
+            </strong>
+
+          </div>
+
+
+          <div class="stat-card red">
+
+            <span>
+              Expired
+            </span>
+
+            <strong id="expiredCoupons">
+              4
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================
+             TOOLBAR
+        ================================= -->
+
+        <div class="toolbar">
+
+          <div class="search-box">
+
+            <span>
+              🔍
+            </span>
+
+            <input
+              type="search"
+              id="couponSearch"
+              placeholder="Search coupon, code or store..."
+            >
+
+          </div>
+
+
+          <select
+            class="filter-select"
+            id="statusFilter"
+          >
+
+            <option value="all">
+              All Status
+            </option>
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="pending">
+              Pending
+            </option>
+
+            <option value="expired">
+              Expired
+            </option>
+
+          </select>
+
+
+          <select
+            class="filter-select"
+            id="storeFilter"
+          >
+
+            <option value="all">
+              All Stores
+            </option>
+
+            <option value="Amazon">
+              Amazon
+            </option>
+
+            <option value="Nike">
+              Nike
+            </option>
+
+            <option value="Walmart">
+              Walmart
+            </option>
+
+            <option value="Best Buy">
+              Best Buy
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- ================================
+             TABLE
+        ================================= -->
+
+        <section class="table-card">
+
+          <div class="table-wrapper">
+
+            <table class="coupons-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Coupon
+                  </th>
+
+                  <th>
+                    Code
+                  </th>
+
+                  <th>
+                    Store
+                  </th>
+
+                  <th>
+                    Discount
+                  </th>
+
+                  <th>
+                    Usage
+                  </th>
+
+                  <th>
+                    Expiry
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Actions
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="couponsTableBody">
+
+
+                <!-- COUPON 1 -->
+
+                <tr
+                  data-name="Amazon Electronics Coupon"
+                  data-code="SAVE20"
+                  data-store="Amazon"
+                  data-status="active"
+                >
+
+                  <td>
+
+                    <div class="coupon-info">
+
+                      <div class="coupon-icon">
+                        🎟️
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          Amazon Electronics Coupon
+                        </strong>
+
+                        <span>
+                          Electronics discount
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="coupon-code">
+                      SAVE20
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="store-name">
+                      Amazon
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="discount">
+                      20% OFF
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="usage">
+                      1,245
+                    </span>
+                  </td>
+
+                  <td>
+                    Sep 30, 2026
+                  </td>
+
+                  <td>
+
+                    <span class="status active">
+                      Active
+                    </span>
+
+                  </td>
+
+                  <td>
+
+                    <div class="actions">
+
+                      <button
+                        class="action-btn edit"
+                        type="button"
+                        title="Edit"
+                        data-action="edit"
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        class="action-btn delete"
+                        type="button"
+                        title="Delete"
+                        data-action="delete"
+                      >
+                        🗑️
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- COUPON 2 -->
+
+                <tr
+                  data-name="Nike Shoes Coupon"
+                  data-code="NIKE30"
+                  data-store="Nike"
+                  data-status="active"
+                >
+
+                  <td>
+
+                    <div class="coupon-info">
+
+                      <div class="coupon-icon">
+                        👟
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          Nike Shoes Coupon
+                        </strong>
+
+                        <span>
+                          Selected footwear
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="coupon-code">
+                      NIKE30
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="store-name">
+                      Nike
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="discount">
+                      30% OFF
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="usage">
+                      856
+                    </span>
+                  </td>
+
+                  <td>
+                    Oct 05, 2026
+                  </td>
+
+                  <td>
+
+                    <span class="status active">
+                      Active
+                    </span>
+
+                  </td>
+
+                  <td>
+
+                    <div class="actions">
+
+                      <button
+                        class="action-btn edit"
+                        type="button"
+                        data-action="edit"
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        class="action-btn delete"
+                        type="button"
+                        data-action="delete"
+                      >
+                        🗑️
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- COUPON 3 -->
+
+                <tr
+                  data-name="Walmart Home Coupon"
+                  data-code="HOME25"
+                  data-store="Walmart"
+                  data-status="pending"
+                >
+
+                  <td>
+
+                    <div class="coupon-info">
+
+                      <div class="coupon-icon">
+                        🏠
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          Walmart Home Coupon
+                        </strong>
+
+                        <span>
+                          Home essentials
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="coupon-code">
+                      HOME25
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="store-name">
+                      Walmart
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="discount">
+                      25% OFF
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="usage">
+                      342
+                    </span>
+                  </td>
+
+                  <td>
+                    Oct 20, 2026
+                  </td>
+
+                  <td>
+
+                    <span class="status pending">
+                      Pending
+                    </span>
+
+                  </td>
+
+                  <td>
+
+                    <div class="actions">
+
+                      <button
+                        class="action-btn edit"
+                        type="button"
+                        data-action="edit"
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        class="action-btn delete"
+                        type="button"
+                        data-action="delete"
+                      >
+                        🗑️
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+                <!-- COUPON 4 -->
+
+                <tr
+                  data-name="Best Buy Laptop Coupon"
+                  data-code="LAPTOP15"
+                  data-store="Best Buy"
+                  data-status="expired"
+                >
+
+                  <td>
+
+                    <div class="coupon-info">
+
+                      <div class="coupon-icon">
+                        💻
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          Best Buy Laptop Coupon
+                        </strong>
+
+                        <span>
+                          Laptop discount
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    <span class="coupon-code">
+                      LAPTOP15
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="store-name">
+                      Best Buy
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="discount">
+                      15% OFF
+                    </span>
+                  </td>
+
+                  <td>
+                    <span class="usage">
+                      529
+                    </span>
+                  </td>
+
+                  <td>
+                    Aug 31, 2026
+                  </td>
+
+                  <td>
+
+                    <span class="status expired">
+                      Expired
+                    </span>
+
+                  </td>
+
+                  <td>
+
+                    <div class="actions">
+
+                      <button
+                        class="action-btn edit"
+                        type="button"
+                        data-action="edit"
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        class="action-btn delete"
+                        type="button"
+                        data-action="delete"
+                      >
+                        🗑️
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+
+          <!-- EMPTY -->
+
+          <div
+            class="empty-state"
+            id="emptyState"
+          >
+
+            <div class="empty-state-icon">
+              🎟️
+            </div>
+
+            <h3>
+              No coupons found
+            </h3>
+
+            <p>
+              Try changing your search or filters.
+            </p>
+
+          </div>
+
+
+          <!-- FOOTER -->
+
+          <div class="table-footer">
+
+            <span
+              class="table-info"
+              id="tableInfo"
+            >
+              Showing 1–4 of 4 coupons
+            </span>
+
+            <div class="pagination">
+
+              <button
+                class="page-btn"
+                type="button"
+              >
+                ‹
+              </button>
+
+              <button
+                class="page-btn active"
+                type="button"
+              >
+                1
+              </button>
+
+              <button
+                class="page-btn"
+                type="button"
+              >
+                2
+              </button>
+
+              <button
+                class="page-btn"
+                type="button"
+              >
+                3
+              </button>
+
+              <button
+                class="page-btn"
+                type="button"
+              >
+                ›
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       ADD / EDIT COUPON MODAL
+  ========================================== -->
+
+  <div
+    class="modal-overlay"
+    id="couponModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h2 id="modalTitle">
+          Add New Coupon
+        </h2>
+
+        <button
+          class="modal-close"
+          id="modalClose"
+          type="button"
+        >
+          ✕
+        </button>
+
+      </div>
+
+
+      <form id="couponForm">
+
+        <div class="modal-body">
+
+          <div class="form-grid">
+
+
+            <!-- Coupon Name -->
+
+            <div class="form-group full">
+
+              <label for="couponName">
+                Coupon Name *
+              </label>
+
+              <input
+                type="text"
+                id="couponName"
+                placeholder="e.g. Amazon Electronics Coupon"
+                required
+              >
+
+            </div>
+
+
+            <!-- Coupon Code -->
+
+            <div class="form-group">
+
+              <label for="couponCode">
+                Coupon Code *
+              </label>
+
+              <input
+                type="text"
+                id="couponCode"
+                placeholder="e.g. SAVE20"
+                required
+              >
+
+            </div>
+
+
+            <!-- Store -->
+
+            <div class="form-group">
+
+              <label for="couponStore">
+                Store *
+              </label>
+
+              <select
+                id="couponStore"
+                required
+              >
+
+                <option value="">
+                  Select Store
+                </option>
+
+                <option value="Amazon">
+                  Amazon
+                </option>
+
+                <option value="Nike">
+                  Nike
+                </option>
+
+                <option value="Walmart">
+                  Walmart
+                </option>
+
+                <option value="Best Buy">
+                  Best Buy
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- Discount -->
+
+            <div class="form-group">
+
+              <label for="couponDiscount">
+                Discount *
+              </label>
+
+              <input
+                type="text"
+                id="couponDiscount"
+                placeholder="e.g. 20% OFF"
+                required
+              >
+
+            </div>
+
+
+            <!-- Type -->
+
+            <div class="form-group">
+
+              <label for="discountType">
+                Discount Type
+              </label>
+
+              <select id="discountType">
+
+                <option value="percentage">
+                  Percentage
+                </option>
+
+                <option value="fixed">
+                  Fixed Amount
+                </option>
+
+                <option value="free-shipping">
+                  Free Shipping
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- Start -->
+
+            <div class="form-group">
+
+              <label for="couponStart">
+                Start Date
+              </label>
+
+              <input
+                type="date"
+                id="couponStart"
+              >
+
+            </div>
+
+
+            <!-- Expiry -->
+
+            <div class="form-group">
+
+              <label for="couponExpiry">
+                Expiry Date
+              </label>
+
+              <input
+                type="date"
+                id="couponExpiry"
+              >
+
+            </div>
+
+
+            <!-- Status -->
+
+            <div class="form-group">
+
+              <label for="couponStatus">
+                Status
+              </label>
+
+              <select id="couponStatus">
+
+                <option value="active">
+                  Active
+                </option>
+
+                <option value="pending">
+                  Pending
+                </option>
+
+                <option value="expired">
+                  Expired
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- Limit -->
+
+            <div class="form-group">
+
+              <label for="usageLimit">
+                Usage Limit
+              </label>
+
+              <input
+                type="number"
+                id="usageLimit"
+                placeholder="e.g. 1000"
+                min="0"
+              >
+
+            </div>
+
+
+            <!-- URL -->
+
+            <div class="form-group full">
+
+              <label for="couponUrl">
+                Coupon URL
+              </label>
+
+              <input
+                type="url"
+                id="couponUrl"
+                placeholder="https://example.com/coupon"
+              >
+
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="form-group full">
+
+              <label for="couponDescription">
+                Description
+              </label>
+
+              <textarea
+                id="couponDescription"
+                placeholder="Describe this coupon..."
+              ></textarea>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+          <button
+            type="button"
+            class="secondary-btn"
+            id="cancelButton"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="primary-btn"
+          >
+            Save Coupon
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+
+        /* ==================================
+           SIDEBAR
+        ================================== */
+
+        const sidebar =
+          document.getElementById(
+            "sidebar"
+          );
+
+        const mobileMenu =
+          document.getElementById(
+            "mobileMenu"
+          );
+
+        const sidebarOverlay =
+          document.getElementById(
+            "sidebarOverlay"
+          );
+
+
+        function closeSidebar() {
+
+          sidebar.classList.remove(
+            "open"
+          );
+
+          sidebarOverlay.classList.remove(
+            "show"
+          );
+
+        }
+
+
+        mobileMenu.addEventListener(
+          "click",
+          function () {
+
+            sidebar.classList.add(
+              "open"
+            );
+
+            sidebarOverlay.classList.add(
+              "show"
+            );
+
+          }
+        );
+
+
+        sidebarOverlay.addEventListener(
+          "click",
+          closeSidebar
+        );
+
+
+        /* ==================================
+           MODAL
+        ================================== */
+
+        const modal =
+          document.getElementById(
+            "couponModal"
+          );
+
+        const addButton =
+          document.getElementById(
+            "addCouponButton"
+          );
+
+        const closeButton =
+          document.getElementById(
+            "modalClose"
+          );
+
+        const cancelButton =
+          document.getElementById(
+            "cancelButton"
+          );
+
+        const modalTitle =
+          document.getElementById(
+            "modalTitle"
+          );
+
+        const form =
+          document.getElementById(
+            "couponForm"
+          );
+
+
+        function openModal() {
+
+          modal.classList.add(
+            "show"
+          );
+
+          document
+            .getElementById("couponName")
+            .focus();
+
+        }
+
+
+        function closeModal() {
+
+          modal.classList.remove(
+            "show"
+          );
+
+          form.reset();
+
+          modalTitle.textContent =
+            "Add New Coupon";
+
+        }
+
+
+        addButton.addEventListener(
+          "click",
+          openModal
+        );
+
+        closeButton.addEventListener(
+          "click",
+          closeModal
+        );
+
+        cancelButton.addEventListener(
+          "click",
+          closeModal
+        );
+
+
+        modal.addEventListener(
+          "click",
+          function (event) {
+
+            if (
+              event.target === modal
+            ) {
+
+              closeModal();
+
+            }
+
+          }
+        );
+
+
+        /* ==================================
+           FORM SUBMIT
+        ================================== */
+
+        form.addEventListener(
+          "submit",
+          function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+              document
+                .getElementById(
+                  "couponName"
+                )
+                .value
+                .trim();
+
+            const code =
+              document
+                .getElementById(
+                  "couponCode"
+                )
+                .value
+                .trim();
+
+
+            if (
+              !name ||
+              !code
+            ) {
+
+              return;
+
+            }
+
+
+            /*
+             * DATABASE/API CONNECTION
+             *
+             * Later:
+             *
+             * POST /api/coupons
+             *
+             * This will save the coupon
+             * in the real database.
+             */
+
+
+            alert(
+              "Coupon form is ready. Database/API will be connected next."
+            );
+
+
+            closeModal();
+
+          }
+        );
+
+
+        /* ==================================
+           SEARCH + FILTER
+        ================================== */
+
+        const searchInput =
+          document.getElementById(
+            "couponSearch"
+          );
+
+        const statusFilter =
+          document.getElementById(
+            "statusFilter"
+          );
+
+        const storeFilter =
+          document.getElementById(
+            "storeFilter"
+          );
+
+        const rows = [
+          ...document.querySelectorAll(
+            "#couponsTableBody tr"
+          )
+        ];
+
+        const emptyState =
+          document.getElementById(
+            "emptyState"
+          );
+
+        const tableInfo =
+          document.getElementById(
+            "tableInfo"
+          );
+
+
+        function filterCoupons() {
+
+          const search =
+            searchInput.value
+              .trim()
+              .toLowerCase();
+
+          const status =
+            statusFilter.value;
+
+          const store =
+            storeFilter.value;
+
+          let visibleCount = 0;
+
+
+          rows.forEach(
+            function (row) {
+
+              const name =
+                (
+                  row.dataset.name ||
+                  ""
+                ).toLowerCase();
+
+              const code =
+                (
+                  row.dataset.code ||
+                  ""
+                ).toLowerCase();
+
+              const rowStore =
+                row.dataset.store ||
+                "";
+
+              const rowStatus =
+                row.dataset.status ||
+                "";
+
+
+              const matchesSearch =
+                !search ||
+                name.includes(search) ||
+                code.includes(search) ||
+                rowStore
+                  .toLowerCase()
+                  .includes(search);
+
+
+              const matchesStatus =
+                status === "all" ||
+                rowStatus === status;
+
+
+              const matchesStore =
+                store === "all" ||
+                rowStore === store;
+
+
+              const visible =
+                matchesSearch &&
+                matchesStatus &&
+                matchesStore;
+
+
+              row.style.display =
+                visible
+                  ? ""
+                  : "none";
+
+
+              if (visible) {
+                visibleCount++;
+              }
+
+            }
+          );
+
+
+          emptyState.style.display =
+            visibleCount === 0
+              ? "block"
+              : "none";
+
+
+          tableInfo.textContent =
+            "Showing " +
+            visibleCount +
+            " of " +
+            rows.length +
+            " coupons";
+
+        }
+
+
+        searchInput.addEventListener(
+          "input",
+          filterCoupons
+        );
+
+        statusFilter.addEventListener(
+          "change",
+          filterCoupons
+        );
+
+        storeFilter.addEventListener(
+          "change",
+          filterCoupons
+        );
+
+
+        /* ==================================
+           DELETE
+        ================================== */
+
+        document
+          .querySelectorAll(
+            '[data-action="delete"]'
+          )
+          .forEach(
+            function (button) {
+
+              button.addEventListener(
+                "click",
+                function () {
+
+                  const row =
+                    button.closest("tr");
+
+                  const name =
+                    row.dataset.name;
+
+
+                  const confirmed =
+                    confirm(
+                      'Delete coupon "' +
+                      name +
+                      '"?'
+                    );
+
+
+                  if (confirmed) {
+
+                    /*
+                     * Later:
+                     *
+                     * DELETE /api/coupons/:id
+                     *
+                     */
+
+                    row.remove();
+
+                    filterCoupons();
+
+                  }
+
+                }
+              );
+
+            }
+          );
+
+
+        /* ==================================
+           EDIT
+        ================================== */
+
+        document
+          .querySelectorAll(
+            '[data-action="edit"]'
+          )
+          .forEach(
+            function (button) {
+
+              button.addEventListener(
+                "click",
+                function () {
+
+                  const row =
+                    button.closest("tr");
+
+                  const name =
+                    row.dataset.name;
+
+                  const code =
+                    row.dataset.code;
+
+                  const store =
+                    row.dataset.store;
+
+
+                  modalTitle.textContent =
+                    "Edit Coupon";
+
+
+                  document
+                    .getElementById(
+                      "couponName"
+                    )
+                    .value = name;
+
+
+                  document
+                    .getElementById(
+                      "couponCode"
+                    )
+                    .value = code;
+
+
+                  document
+                    .getElementById(
+                      "couponStore"
+                    )
+                    .value = store;
+
+
+                  openModal();
+
+                }
+              );
+
+            }
+          );
+
+
+        /* ==================================
+           ESC KEY
+        ================================== */
+
+        document.addEventListener(
+          "keydown",
+          function (event) {
+
+            if (
+              event.key === "Escape"
+            ) {
+
+              closeModal();
+
+              closeSidebar();
+
+            }
+
+          }
+        );
+
+
+        /* ==================================
+           NOTIFICATION
+        ================================== */
+
+        document
+          .getElementById(
+            "notificationButton"
+          )
+          .addEventListener(
+            "click",
+            function () {
+
+              alert(
+                "Notifications will be connected to the database."
+              );
+
+            }
+          );
+
+
+        /* ==================================
+           URL ACTION
+        ================================== */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        if (
+          params.get("action") === "add"
+        ) {
+
+          openModal();
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
