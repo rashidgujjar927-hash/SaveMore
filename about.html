@@ -1,1 +1,1198 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About Us — SaveMore</title>
+
+  <meta
+    name="description"
+    content="Learn more about SaveMore, a deals and coupons website helping shoppers discover discounts, offers and savings."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================
+       ABOUT PAGE
+    ========================================== */
+
+    .about-hero {
+      padding: 70px 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          #effdf5,
+          #ffffff 55%,
+          #eff6ff
+        );
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-hero-content {
+      max-width: 780px;
+    }
+
+    .about-hero h1 {
+      margin-bottom: 15px;
+
+      color: var(--dark);
+
+      font-size:
+        clamp(38px, 5vw, 58px);
+
+      line-height: 1.05;
+
+      letter-spacing: -2px;
+    }
+
+    .about-hero h1 span {
+      color: var(--primary);
+    }
+
+    .about-hero p {
+      max-width: 680px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.75;
+    }
+
+
+    /* =========================================
+       ABOUT CONTENT
+    ========================================== */
+
+    .about-page {
+      padding: 70px 0 90px;
+
+      background: var(--light);
+    }
+
+    .about-intro {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+      gap: 50px;
+
+      align-items: center;
+
+      margin-bottom: 70px;
+    }
+
+    .about-intro h2 {
+      margin-bottom: 15px;
+
+      color: var(--dark);
+
+      font-size: 30px;
+
+      line-height: 1.2;
+    }
+
+    .about-intro h2 span {
+      color: var(--primary);
+    }
+
+    .about-intro p {
+      margin-bottom: 14px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+
+    /* =========================================
+       ABOUT VISUAL
+    ========================================== */
+
+    .about-visual {
+      position: relative;
+
+      min-height: 330px;
+
+      padding: 30px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #16a34a,
+          #22c55e 50%,
+          #0ea5e9
+        );
+
+      overflow: hidden;
+
+      box-shadow: var(--shadow);
+    }
+
+    .about-visual::before,
+    .about-visual::after {
+      content: "";
+
+      position: absolute;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.12);
+    }
+
+    .about-visual::before {
+      width: 250px;
+      height: 250px;
+
+      top: -100px;
+      right: -80px;
+    }
+
+    .about-visual::after {
+      width: 180px;
+      height: 180px;
+
+      bottom: -75px;
+      left: -55px;
+    }
+
+    .saving-card {
+      position: relative;
+
+      z-index: 2;
+
+      width: 250px;
+
+      padding: 25px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.97);
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.18);
+    }
+
+    .saving-card-icon {
+      width: 55px;
+      height: 55px;
+
+      display: grid;
+
+      place-items: center;
+
+      margin-bottom: 15px;
+
+      border-radius: 12px;
+
+      background: #dcfce7;
+
+      font-size: 27px;
+    }
+
+    .saving-card h3 {
+      margin-bottom: 5px;
+
+      color: var(--dark);
+
+      font-size: 19px;
+    }
+
+    .saving-card p {
+      margin-bottom: 15px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+    .saving-price {
+      color: var(--primary);
+
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+
+    /* =========================================
+       STATS
+    ========================================== */
+
+    .about-stats {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 15px;
+
+      margin-bottom: 70px;
+    }
+
+    .about-stat {
+      padding: 25px;
+
+      text-align: center;
+
+      background: var(--white);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .about-stat strong {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: var(--primary);
+
+      font-size: 28px;
+    }
+
+    .about-stat span {
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================
+       MISSION
+    ========================================== */
+
+    .about-section-title {
+      max-width: 650px;
+
+      margin: 0 auto 30px;
+
+      text-align: center;
+    }
+
+    .about-section-title h2 {
+      margin-bottom: 8px;
+
+      color: var(--dark);
+
+      font-size: 28px;
+    }
+
+    .about-section-title p {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+    .mission-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 17px;
+
+      margin-bottom: 70px;
+    }
+
+    .mission-card {
+      padding: 28px;
+
+      background: var(--white);
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 11px;
+
+      box-shadow: var(--shadow-sm);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .mission-card:hover {
+      transform: translateY(-3px);
+
+      box-shadow: var(--shadow);
+    }
+
+    .mission-icon {
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+
+      place-items: center;
+
+      margin-bottom: 17px;
+
+      border-radius: 10px;
+
+      background: #f0fdf4;
+
+      font-size: 22px;
+    }
+
+    .mission-card h3 {
+      margin-bottom: 8px;
+
+      color: var(--dark);
+
+      font-size: 16px;
+    }
+
+    .mission-card p {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       HOW IT WORKS
+    ========================================== */
+
+    .steps {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 30px;
+
+      margin-bottom: 70px;
+    }
+
+    .step {
+      position: relative;
+
+      text-align: center;
+    }
+
+    .step-number {
+      width: 52px;
+      height: 52px;
+
+      display: grid;
+
+      place-items: center;
+
+      margin: 0 auto 15px;
+
+      border-radius: 50%;
+
+      background: var(--primary);
+
+      color: var(--white);
+
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin-bottom: 7px;
+
+      color: var(--dark);
+
+      font-size: 15px;
+    }
+
+    .step p {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       CTA
+    ========================================== */
+
+    .about-cta {
+      padding: 45px 30px;
+
+      text-align: center;
+
+      border-radius: 13px;
+
+      background: var(--dark);
+
+      color: var(--white);
+    }
+
+    .about-cta h2 {
+      margin-bottom: 10px;
+
+      color: var(--white);
+
+      font-size: 28px;
+    }
+
+    .about-cta p {
+      max-width: 570px;
+
+      margin: 0 auto 22px;
+
+      color: #cbd5e1;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+    .about-cta-buttons {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+    }
+
+    .about-cta .btn-primary {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-height: 43px;
+
+      padding: 0 20px;
+
+      border-radius: 7px;
+
+      background: var(--primary);
+
+      color: var(--white);
+
+      text-decoration: none;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .about-cta .btn-secondary {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-height: 43px;
+
+      padding: 0 20px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.2);
+
+      border-radius: 7px;
+
+      background:
+        rgba(255,255,255,.06);
+
+      color: var(--white);
+
+      text-decoration: none;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================== */
+
+    @media (max-width: 850px) {
+
+      .about-intro {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+      }
+
+      .about-stats {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .mission-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+      }
+
+    }
+
+    @media (max-width: 550px) {
+
+      .about-hero {
+        padding: 50px 0;
+      }
+
+      .about-page {
+        padding-top: 50px;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .mission-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual {
+        min-height: 280px;
+      }
+
+      .saving-card {
+        width: 220px;
+      }
+
+      .about-cta {
+        padding: 35px 20px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================
+       HEADER
+  ========================================== -->
+
+  <header class="header">
+
+    <div class="container header-container">
+
+      <a href="index.html" class="logo">
+        Save<span>More</span>
+      </a>
+
+      <nav class="navbar">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+        <a href="about.html" class="active">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          class="search-btn"
+          type="button"
+          aria-label="Search"
+        >
+          🔍
+        </button>
+
+        <a
+          href="favorites.html"
+          class="favorites-btn"
+          aria-label="Favorites"
+        >
+          ♡
+        </a>
+
+        <button
+          class="menu-btn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================== -->
+
+  <main>
+
+    <!-- Hero -->
+
+    <section class="about-hero">
+
+      <div class="container">
+
+        <div class="about-hero-content">
+
+          <span class="section-label">
+            About SaveMore
+          </span>
+
+          <h1>
+            We Help You
+            <span>Save More</span>
+          </h1>
+
+          <p>
+            SaveMore brings deals, coupons,
+            discounts and offers together in
+            one simple place, helping shoppers
+            discover more ways to save.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Main About -->
+
+    <section class="about-page">
+
+      <div class="container">
+
+
+        <!-- Intro -->
+
+        <div class="about-intro">
+
+          <div>
+
+            <span class="section-label">
+              Our Story
+            </span>
+
+            <h2>
+              Shopping smarter
+              <span>starts here.</span>
+            </h2>
+
+            <p>
+              Finding a good deal should not
+              require searching dozens of
+              websites. SaveMore is designed
+              to make that process easier.
+            </p>
+
+            <p>
+              We bring together deals, coupon
+              codes, store offers and discounts
+              so shoppers can quickly discover
+              opportunities to save.
+            </p>
+
+            <p>
+              Our goal is simple: make online
+              savings easier to discover,
+              understand and use.
+            </p>
+
+          </div>
+
+
+          <div class="about-visual">
+
+            <div class="saving-card">
+
+              <div class="saving-card-icon">
+                💰
+              </div>
+
+              <h3>
+                Save More
+              </h3>
+
+              <p>
+                Discover useful offers before
+                you complete your next purchase.
+              </p>
+
+              <div class="saving-price">
+                $SAVE
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Stats -->
+
+        <div class="about-stats">
+
+          <div class="about-stat">
+
+            <strong>
+              500+
+            </strong>
+
+            <span>
+              Active Deals
+            </span>
+
+          </div>
+
+
+          <div class="about-stat">
+
+            <strong>
+              100+
+            </strong>
+
+            <span>
+              Store Partners
+            </span>
+
+          </div>
+
+
+          <div class="about-stat">
+
+            <strong>
+              50+
+            </strong>
+
+            <span>
+              Categories
+            </span>
+
+          </div>
+
+
+          <div class="about-stat">
+
+            <strong>
+              24/7
+            </strong>
+
+            <span>
+              Deal Discovery
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- Mission -->
+
+        <div class="about-section-title">
+
+          <span class="section-label">
+            What We Do
+          </span>
+
+          <h2>
+            Built Around Better Savings
+          </h2>
+
+          <p>
+            SaveMore focuses on making deals
+            easy to discover and simple to use.
+          </p>
+
+        </div>
+
+
+        <div class="mission-grid">
+
+
+          <div class="mission-card">
+
+            <div class="mission-icon">
+              🔎
+            </div>
+
+            <h3>
+              Find Deals
+            </h3>
+
+            <p>
+              Browse deals and offers across
+              different categories and stores
+              from one convenient place.
+            </p>
+
+          </div>
+
+
+          <div class="mission-card">
+
+            <div class="mission-icon">
+              🎟️
+            </div>
+
+            <h3>
+              Discover Coupons
+            </h3>
+
+            <p>
+              Explore coupon codes and
+              promotions that can help reduce
+              the cost of your purchases.
+            </p>
+
+          </div>
+
+
+          <div class="mission-card">
+
+            <div class="mission-icon">
+              🏪
+            </div>
+
+            <h3>
+              Explore Stores
+            </h3>
+
+            <p>
+              Find offers from popular stores
+              and discover new places to shop
+              and save.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- How It Works -->
+
+        <div class="about-section-title">
+
+          <span class="section-label">
+            Simple Process
+          </span>
+
+          <h2>
+            How SaveMore Works
+          </h2>
+
+          <p>
+            Finding your next saving opportunity
+            only takes a few simple steps.
+          </p>
+
+        </div>
+
+
+        <div class="steps">
+
+
+          <div class="step">
+
+            <div class="step-number">
+              1
+            </div>
+
+            <h3>
+              Browse
+            </h3>
+
+            <p>
+              Explore deals, coupons, stores
+              or categories to find what you
+              are looking for.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">
+              2
+            </div>
+
+            <h3>
+              Choose
+            </h3>
+
+            <p>
+              Open an offer and review the
+              available discount or coupon
+              details.
+            </p>
+
+          </div>
+
+
+          <div class="step">
+
+            <div class="step-number">
+              3
+            </div>
+
+            <h3>
+              Save
+            </h3>
+
+            <p>
+              Follow the offer and use the
+              available deal or coupon when
+              completing your purchase.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CTA -->
+
+        <div class="about-cta">
+
+          <h2>
+            Ready to Start Saving?
+          </h2>
+
+          <p>
+            Explore the latest deals and
+            discover offers that could help
+            you save on your next purchase.
+          </p>
+
+          <div class="about-cta-buttons">
+
+            <a
+              href="deals.html"
+              class="btn-primary"
+            >
+              Browse Deals →
+            </a>
+
+            <a
+              href="coupons.html"
+              class="btn-secondary"
+            >
+              View Coupons
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+  ========================================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+          Save<span>More</span>
+        </a>
+
+        <p>
+          Discover the best deals, coupons,
+          discounts and offers — all in one place.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Facebook">
+            f
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            ◎
+          </a>
+
+          <a href="#" aria-label="X">
+            𝕏
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Explore
+        </h3>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Company
+        </h3>
+
+        <a href="about.html">
+          About Us
+        </a>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+        <a href="favorites.html">
+          Favorites
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Legal
+        </h3>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <p>
+        ©
+        <span id="currentYear"></span>
+        SaveMore. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const year =
+          document.getElementById(
+            "currentYear"
+          );
+
+        if (year) {
+          year.textContent =
+            new Date().getFullYear();
+        }
+
+      }
+    );
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
