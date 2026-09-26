@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>All Deals — SaveMore</title>
+  <meta
+    name="description"
+    content="Browse the latest deals, discounts and offers on SaveMore."
+  >
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* =========================================
+       DEALS PAGE ONLY
+    ========================================= */
+
+    .page-hero {
+      padding: 65px 0;
+      background:
+        linear-gradient(
+          135deg,
+          #f0fdf4,
+          #ffffff
+        );
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-hero-content {
+      max-width: 700px;
+    }
+
+    .page-hero h1 {
+      color: var(--dark);
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 14px;
+    }
+
+    .page-hero h1 span {
+      color: var(--primary);
+    }
+
+    .page-hero p {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 650px;
+    }
+
+    .deals-toolbar {
+      padding: 30px 0 0;
+      background: var(--light);
+    }
+
+    .toolbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .deal-search {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .deal-search input {
+      width: 100%;
+      height: 48px;
+      padding: 0 18px 0 45px;
+
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      outline: none;
+      color: var(--dark);
+      font-size: 13px;
+    }
+
+    .deal-search input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.08);
+    }
+
+    .deal-search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .sort-select {
+      height: 48px;
+      min-width: 190px;
+
+      padding: 0 14px;
+
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      outline: none;
+      color: var(--dark);
+
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .category-filters {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+
+      padding: 22px 0 30px;
+    }
+
+    .filter-btn {
+      padding: 9px 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--white);
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--white);
+    }
+
+    .results-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 22px;
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .results-count strong {
+      color: var(--dark);
+    }
+
+    .all-deals-section {
+      padding: 35px 0 90px;
+      background: var(--light);
+    }
+
+    .deal-grid-wide {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .deal-card.hidden {
+      display: none;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 70px 20px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    .empty-icon {
+      width: 70px;
+      height: 70px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 18px;
+
+      background: var(--primary-light);
+      border-radius: 50%;
+
+      font-size: 30px;
+    }
+
+    .empty-state h3 {
+      color: var(--dark);
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+
+    /* =========================================
+       DEALS PAGE RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 1000px) {
+      .deal-grid-wide {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-hero {
+        padding: 50px 0;
+      }
+
+      .page-hero h1 {
+        font-size: 40px;
+      }
+
+      .toolbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .deal-search {
+        min-width: 100%;
+      }
+
+      .sort-select {
+        width: 100%;
+      }
+
+      .deal-grid-wide {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="header">
+
+    <div class="container header-container">
+
+      <a href="index.html" class="logo">
+        Save<span>More</span>
+      </a>
+
+      <nav class="navbar">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="deals.html" class="active">
+          Deals
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          class="search-btn"
+          type="button"
+          aria-label="Search"
+        >
+          🔍
+        </button>
+
+        <a
+          href="favorites.html"
+          class="favorites-btn"
+          aria-label="Favorites"
+        >
+          ♡
+        </a>
+
+        <button
+          class="menu-btn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       PAGE HERO
+  ========================== -->
+
+  <section class="page-hero">
+
+    <div class="container">
+
+      <div class="page-hero-content">
+
+        <span class="section-label">
+          SaveMore Deals
+        </span>
+
+        <h1>
+          Find Your Next
+          <span>Great Deal.</span>
+        </h1>
+
+        <p>
+          Explore our latest discounts, special offers and
+          money-saving deals across popular categories.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FILTERS & SEARCH
+  ========================== -->
+
+  <section class="deals-toolbar">
+
+    <div class="container">
+
+      <div class="toolbar-inner">
+
+        <div class="deal-search">
+
+          <span class="deal-search-icon">
+            🔍
+          </span>
+
+          <input
+            type="search"
+            id="dealSearch"
+            placeholder="Search deals..."
+            aria-label="Search deals"
+          >
+
+        </div>
+
+
+        <select
+          id="sortDeals"
+          class="sort-select"
+          aria-label="Sort deals"
+        >
+          <option value="default">
+            Sort: Featured
+          </option>
+
+          <option value="discount">
+            Biggest Discount
+          </option>
+
+          <option value="price-low">
+            Price: Low to High
+          </option>
+
+          <option value="price-high">
+            Price: High to Low
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- Category Filters -->
+
+      <div class="category-filters">
+
+        <button
+          class="filter-btn active"
+          data-category="all"
+          type="button"
+        >
+          All Deals
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="electronics"
+          type="button"
+        >
+          Electronics
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="fashion"
+          type="button"
+        >
+          Fashion
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="home"
+          type="button"
+        >
+          Home & Kitchen
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="beauty"
+          type="button"
+        >
+          Beauty
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="sports"
+          type="button"
+        >
+          Sports
+        </button>
+
+        <button
+          class="filter-btn"
+          data-category="grocery"
+          type="button"
+        >
+          Grocery
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ALL DEALS
+  ========================== -->
+
+  <main class="all-deals-section">
+
+    <div class="container">
+
+      <div class="results-row">
+
+        <p class="results-count">
+          Showing
+          <strong id="resultsCount">8</strong>
+          deals
+        </p>
+
+      </div>
+
+
+      <div
+        class="deal-grid-wide"
+        id="dealsGrid"
+      >
+
+        <!-- =================================
+             DEAL 1
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="electronics"
+          data-name="Wireless Headphones"
+          data-price="64.99"
+          data-discount="35"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              35% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              🎧
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Electronics
+            </span>
+
+            <h3>
+              Wireless Headphones
+            </h3>
+
+            <p class="deal-description">
+              Premium wireless headphones with
+              noise cancellation.
+            </p>
+
+            <div class="deal-price">
+              <strong>$64.99</strong>
+              <del>$99.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 2
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="fashion"
+          data-name="Running Sneakers"
+          data-price="49.99"
+          data-discount="50"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              50% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              👟
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Fashion
+            </span>
+
+            <h3>
+              Running Sneakers
+            </h3>
+
+            <p class="deal-description">
+              Comfortable and stylish sneakers
+              for everyday use.
+            </p>
+
+            <div class="deal-price">
+              <strong>$49.99</strong>
+              <del>$99.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 3
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="home"
+          data-name="Smart Coffee Maker"
+          data-price="59.99"
+          data-discount="40"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              40% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              ☕
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Home & Kitchen
+            </span>
+
+            <h3>
+              Smart Coffee Maker
+            </h3>
+
+            <p class="deal-description">
+              Make your favorite coffee with
+              one simple touch.
+            </p>
+
+            <div class="deal-price">
+              <strong>$59.99</strong>
+              <del>$99.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 4
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="electronics"
+          data-name="Smart Watch"
+          data-price="69.99"
+          data-discount="30"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              30% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              ⌚
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Electronics
+            </span>
+
+            <h3>
+              Smart Watch
+            </h3>
+
+            <p class="deal-description">
+              Track your fitness and stay
+              connected all day.
+            </p>
+
+            <div class="deal-price">
+              <strong>$69.99</strong>
+              <del>$99.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 5
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="beauty"
+          data-name="Skincare Set"
+          data-price="29.99"
+          data-discount="45"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              45% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              🧴
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Beauty
+            </span>
+
+            <h3>
+              Premium Skincare Set
+            </h3>
+
+            <p class="deal-description">
+              Complete skincare essentials
+              for your daily routine.
+            </p>
+
+            <div class="deal-price">
+              <strong>$29.99</strong>
+              <del>$54.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 6
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="sports"
+          data-name="Fitness Kit"
+          data-price="39.99"
+          data-discount="38"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              38% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              🏋️
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Sports
+            </span>
+
+            <h3>
+              Home Fitness Kit
+            </h3>
+
+            <p class="deal-description">
+              Essential fitness equipment
+              for home workouts.
+            </p>
+
+            <div class="deal-price">
+              <strong>$39.99</strong>
+              <del>$64.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 7
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="grocery"
+          data-name="Organic Grocery Box"
+          data-price="24.99"
+          data-discount="25"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              25% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              🛒
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Grocery
+            </span>
+
+            <h3>
+              Organic Grocery Box
+            </h3>
+
+            <p class="deal-description">
+              A selection of everyday organic
+              grocery essentials.
+            </p>
+
+            <div class="deal-price">
+              <strong>$24.99</strong>
+              <del>$32.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             DEAL 8
+        ================================== -->
+
+        <article
+          class="deal-card"
+          data-category="electronics"
+          data-name="Bluetooth Speaker"
+          data-price="34.99"
+          data-discount="42"
+        >
+
+          <div class="deal-image">
+
+            <span class="discount-badge">
+              42% OFF
+            </span>
+
+            <button
+              class="wishlist-btn"
+              type="button"
+              aria-label="Add to favorites"
+            >
+              ♡
+            </button>
+
+            <div class="product-placeholder">
+              🔊
+            </div>
+
+          </div>
+
+          <div class="deal-content">
+
+            <span class="deal-category">
+              Electronics
+            </span>
+
+            <h3>
+              Bluetooth Speaker
+            </h3>
+
+            <p class="deal-description">
+              Portable speaker with powerful
+              sound and long battery life.
+            </p>
+
+            <div class="deal-price">
+              <strong>$34.99</strong>
+              <del>$59.99</del>
+            </div>
+
+            <a
+              href="deal.html"
+              class="deal-button"
+            >
+              Get Deal
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- =================================
+             EMPTY STATE
+        ================================== -->
+
+        <div
+          class="empty-state"
+          id="emptyState"
+        >
+
+          <div class="empty-icon">
+            🔎
+          </div>
+
+          <h3>
+            No deals found
+          </h3>
+
+          <p>
+            Try another search term or category.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="logo">
+          Save<span>More</span>
+        </a>
+
+        <p>
+          Discover the best deals, discounts and
+          offers — all in one place.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Facebook">
+            f
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            ◎
+          </a>
+
+          <a href="#" aria-label="X">
+            𝕏
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Explore</h3>
+
+        <a href="deals.html">
+          All Deals
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+        <a href="favorites.html">
+          Favorites
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Company</h3>
+
+        <a href="about.html">
+          About Us
+        </a>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Legal</h3>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms.html">
+          Terms & Conditions
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <p>
+        © <span id="currentYear"></span>
+        SaveMore. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+
+  <!-- =========================================
+       DEALS PAGE JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const searchInput =
+        document.getElementById("dealSearch");
+
+      const filterButtons =
+        document.querySelectorAll(".filter-btn");
+
+      const sortSelect =
+        document.getElementById("sortDeals");
+
+      const dealsGrid =
+        document.getElementById("dealsGrid");
+
+      const dealCards =
+        Array.from(
+          dealsGrid.querySelectorAll(".deal-card")
+        );
+
+      const resultsCount =
+        document.getElementById("resultsCount");
+
+      const emptyState =
+        document.getElementById("emptyState");
+
+
+      let selectedCategory = "all";
+
+
+      /* =========================================
+         FILTER DEALS
+      ========================================== */
+
+      function filterDeals() {
+
+        const searchTerm =
+          searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+        let visibleDeals = [];
+
+
+        dealCards.forEach((card) => {
+
+          const category =
+            card.dataset.category;
+
+          const name =
+            card.dataset.name.toLowerCase();
+
+
+          const categoryMatch =
+            selectedCategory === "all" ||
+            category === selectedCategory;
+
+
+          const searchMatch =
+            name.includes(searchTerm);
+
+
+          const shouldShow =
+            categoryMatch &&
+            searchMatch;
+
+
+          if (shouldShow) {
+
+            card.classList.remove("hidden");
+
+            visibleDeals.push(card);
+
+          } else {
+
+            card.classList.add("hidden");
+
+          }
+
+        });
+
+
+        resultsCount.textContent =
+          visibleDeals.length;
+
+
+        if (visibleDeals.length === 0) {
+          emptyState.classList.add("show");
+        } else {
+          emptyState.classList.remove("show");
+        }
+
+      }
+
+
+      /* =========================================
+         CATEGORY BUTTONS
+      ========================================== */
+
+      filterButtons.forEach((button) => {
+
+        button.addEventListener("click", () => {
+
+          filterButtons.forEach((btn) => {
+            btn.classList.remove("active");
+          });
+
+
+          button.classList.add("active");
+
+
+          selectedCategory =
+            button.dataset.category;
+
+
+          filterDeals();
+
+        });
+
+      });
+
+
+      /* =========================================
+         SEARCH
+      ========================================== */
+
+      searchInput.addEventListener(
+        "input",
+        filterDeals
+      );
+
+
+      /* =========================================
+         SORT
+      ========================================== */
+
+      sortSelect.addEventListener(
+        "change",
+        () => {
+
+          const sortValue =
+            sortSelect.value;
+
+
+          const sortedCards =
+            [...dealCards].sort(
+              (a, b) => {
+
+                if (sortValue === "discount") {
+
+                  return (
+                    Number(b.dataset.discount) -
+                    Number(a.dataset.discount)
+                  );
+
+                }
+
+
+                if (sortValue === "price-low") {
+
+                  return (
+                    Number(a.dataset.price) -
+                    Number(b.dataset.price)
+                  );
+
+                }
+
+
+                if (sortValue === "price-high") {
+
+                  return (
+                    Number(b.dataset.price) -
+                    Number(a.dataset.price)
+                  );
+
+                }
+
+
+                return 0;
+
+              }
+            );
+
+
+          sortedCards.forEach((card) => {
+            dealsGrid.appendChild(card);
+          });
+
+
+          dealsGrid.appendChild(emptyState);
+
+          filterDeals();
+
+        });
+
+      });
+
+
+      /* =========================================
+         URL CATEGORY SUPPORT
+         
+         Example:
+         deals.html?category=electronics
+      ========================================== */
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const urlCategory =
+        params.get("category");
+
+
+      if (urlCategory) {
+
+        const matchingButton =
+          document.querySelector(
+            `.filter-btn[data-category="${urlCategory}"]`
+          );
+
+
+        if (matchingButton) {
+
+          filterButtons.forEach((btn) => {
+            btn.classList.remove("active");
+          });
+
+
+          matchingButton.classList.add("active");
+
+          selectedCategory =
+            urlCategory;
+
+        }
+
+      }
+
+
+      filterDeals();
+
+    });
+
+  </script>
+
+</body>
+</html>
