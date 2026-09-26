@@ -4,40 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>All Deals — SaveMore</title>
+  <title>Best Deals — SaveMore</title>
+
   <meta
     name="description"
-    content="Browse the latest deals, discounts and offers on SaveMore."
+    content="Discover the latest deals, discounts and offers on SaveMore."
   >
 
   <link rel="stylesheet" href="style.css">
 
   <style>
     /* =========================================
-       DEALS PAGE ONLY
-    ========================================= */
+       DEALS PAGE
+    ========================================== */
 
     .page-hero {
       padding: 65px 0;
+
       background:
         linear-gradient(
           135deg,
           #f0fdf4,
-          #ffffff
+          #ffffff 60%,
+          #fff7ed
         );
+
       border-bottom: 1px solid var(--border);
     }
 
     .page-hero-content {
-      max-width: 700px;
+      max-width: 760px;
     }
 
     .page-hero h1 {
+      margin-bottom: 12px;
+
       color: var(--dark);
-      font-size: clamp(38px, 5vw, 58px);
-      line-height: 1.1;
+
+      font-size:
+        clamp(38px, 5vw, 58px);
+
+      line-height: 1.05;
+
       letter-spacing: -2px;
-      margin-bottom: 14px;
     }
 
     .page-hero h1 span {
@@ -45,95 +54,147 @@
     }
 
     .page-hero p {
-      color: var(--muted);
-      font-size: 16px;
       max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 16px;
     }
 
-    .deals-toolbar {
-      padding: 30px 0 0;
+
+    /* =========================================
+       DEAL TOOLBAR
+    ========================================== */
+
+    .deals-page {
+      padding: 60px 0 90px;
+
       background: var(--light);
     }
 
-    .toolbar-inner {
+    .deal-toolbar {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      flex-wrap: wrap;
+
+      gap: 20px;
+
+      margin-bottom: 30px;
     }
 
     .deal-search {
       flex: 1;
-      min-width: 260px;
-      position: relative;
+
+      max-width: 500px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 6px 8px 6px 15px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: var(--white);
+    }
+
+    .deal-search span {
+      color: var(--muted);
     }
 
     .deal-search input {
       width: 100%;
-      height: 48px;
-      padding: 0 18px 0 45px;
 
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 9px;
+      min-width: 0;
 
-      outline: none;
-      color: var(--dark);
-      font-size: 13px;
-    }
+      height: 40px;
 
-    .deal-search input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.08);
-    }
+      border: 0;
 
-    .deal-search-icon {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-    }
+      outline: 0;
 
-    .sort-select {
-      height: 48px;
-      min-width: 190px;
+      background: transparent;
 
-      padding: 0 14px;
-
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-
-      outline: none;
       color: var(--dark);
 
       font-size: 13px;
+    }
+
+    .deal-search button {
+      flex-shrink: 0;
+
+      width: 40px;
+      height: 40px;
+
+      border: 0;
+
+      border-radius: 8px;
+
+      background: var(--primary);
+
+      color: var(--white);
+    }
+
+    .deal-sort {
+      height: 52px;
+
+      padding:
+        0
+        14px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: 0;
+
+      background: var(--white);
+
+      color: var(--dark);
+
+      font-size: 12px;
+
       cursor: pointer;
     }
 
-    .category-filters {
+
+    /* =========================================
+       FILTERS
+    ========================================== */
+
+    .deal-filters {
       display: flex;
-      gap: 9px;
+
       flex-wrap: wrap;
 
-      padding: 22px 0 30px;
+      gap: 9px;
+
+      margin-bottom: 30px;
     }
 
     .filter-btn {
-      padding: 9px 15px;
+      padding:
+        9px
+        15px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: 999px;
 
       background: var(--white);
+
       color: var(--text);
 
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-
-      cursor: pointer;
 
       transition:
         background 0.2s ease,
@@ -143,127 +204,175 @@
 
     .filter-btn:hover,
     .filter-btn.active {
-      background: var(--primary);
       border-color: var(--primary);
+
+      background: var(--primary);
+
       color: var(--white);
     }
 
-    .results-row {
+
+    /* =========================================
+       RESULTS INFO
+    ========================================== */
+
+    .results-info {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
-      margin-bottom: 22px;
+      gap: 15px;
+
+      margin-bottom: 20px;
     }
 
-    .results-count {
+    .results-info h2 {
+      color: var(--dark);
+
+      font-size: 22px;
+    }
+
+    .results-info span {
       color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    /* =========================================
+       EXTRA DEAL META
+    ========================================== */
+
+    .deal-store {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin-bottom: 12px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .deal-store-icon {
+      width: 24px;
+      height: 24px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 6px;
+
+      background: var(--light);
+
       font-size: 13px;
     }
 
-    .results-count strong {
-      color: var(--dark);
+    .deal-expiry {
+      margin-top: 10px;
+
+      color: var(--muted);
+
+      font-size: 10px;
     }
 
-    .all-deals-section {
-      padding: 35px 0 90px;
-      background: var(--light);
+    .deal-expiry strong {
+      color: var(--accent);
     }
 
-    .deal-grid-wide {
-      display: grid;
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-      gap: 20px;
-    }
+
+    /* =========================================
+       HIDDEN DEAL
+    ========================================== */
 
     .deal-card.hidden {
       display: none;
     }
 
-    .empty-state {
+
+    /* =========================================
+       NO RESULTS
+    ========================================== */
+
+    .no-results {
       display: none;
+
       padding: 70px 20px;
+
       text-align: center;
-      grid-column: 1 / -1;
     }
 
-    .empty-state.show {
+    .no-results.show {
       display: block;
     }
 
-    .empty-icon {
-      width: 70px;
-      height: 70px;
+    .no-results-icon {
+      margin-bottom: 15px;
 
-      display: grid;
-      place-items: center;
-
-      margin: 0 auto 18px;
-
-      background: var(--primary-light);
-      border-radius: 50%;
-
-      font-size: 30px;
+      font-size: 55px;
     }
 
-    .empty-state h3 {
-      color: var(--dark);
-      font-size: 22px;
+    .no-results h3 {
       margin-bottom: 7px;
+
+      color: var(--dark);
+
+      font-size: 22px;
     }
 
-    .empty-state p {
+    .no-results p {
       color: var(--muted);
-      font-size: 14px;
+
+      font-size: 13px;
     }
 
 
     /* =========================================
-       DEALS PAGE RESPONSIVE
-    ========================================= */
+       RESPONSIVE
+    ========================================== */
 
-    @media (max-width: 1000px) {
-      .deal-grid-wide {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-    }
+    @media (max-width: 700px) {
 
-    @media (max-width: 760px) {
       .page-hero {
         padding: 50px 0;
       }
 
-      .page-hero h1 {
-        font-size: 40px;
-      }
-
-      .toolbar-inner {
-        flex-direction: column;
+      .deal-toolbar {
         align-items: stretch;
+
+        flex-direction: column;
       }
 
       .deal-search {
-        min-width: 100%;
+        max-width: none;
       }
 
-      .sort-select {
+      .deal-sort {
         width: 100%;
       }
 
-      .deal-grid-wide {
-        grid-template-columns: 1fr;
+      .results-info {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
       }
+
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
+
+  <!-- =========================================
        HEADER
-  ========================== -->
+  ========================================== -->
 
   <header class="header">
 
@@ -273,6 +382,7 @@
         Save<span>More</span>
       </a>
 
+
       <nav class="navbar">
 
         <a href="index.html">
@@ -281,6 +391,14 @@
 
         <a href="deals.html" class="active">
           Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
         </a>
 
         <a href="categories.html">
@@ -296,6 +414,7 @@
         </a>
 
       </nav>
+
 
       <div class="header-actions">
 
@@ -331,702 +450,1065 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =========================================
        PAGE HERO
-  ========================== -->
+  ========================================== -->
 
-  <section class="page-hero">
+  <main>
 
-    <div class="container">
+    <section class="page-hero">
 
-      <div class="page-hero-content">
+      <div class="container">
 
-        <span class="section-label">
-          SaveMore Deals
-        </span>
+        <div class="page-hero-content">
 
-        <h1>
-          Find Your Next
-          <span>Great Deal.</span>
-        </h1>
+          <span class="section-label">
+            SaveMore Deals
+          </span>
 
-        <p>
-          Explore our latest discounts, special offers and
-          money-saving deals across popular categories.
-        </p>
+          <h1>
+            Today's Best
+            <span>Deals</span>
+          </h1>
+
+          <p>
+            Find the latest discounts, offers and
+            money-saving deals from popular stores.
+          </p>
+
+        </div>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- =========================
-       FILTERS & SEARCH
-  ========================== -->
+    <!-- =========================================
+         DEALS
+    ========================================== -->
 
-  <section class="deals-toolbar">
+    <section class="deals-page">
 
-    <div class="container">
+      <div class="container">
 
-      <div class="toolbar-inner">
 
-        <div class="deal-search">
+        <!-- Toolbar -->
 
-          <span class="deal-search-icon">
-            🔍
-          </span>
+        <div class="deal-toolbar">
 
-          <input
-            type="search"
-            id="dealSearch"
-            placeholder="Search deals..."
-            aria-label="Search deals"
+          <form
+            class="deal-search"
+            id="dealSearchForm"
           >
+
+            <span>
+              🔎
+            </span>
+
+            <input
+              type="search"
+              id="dealSearchInput"
+              placeholder="Search deals..."
+              autocomplete="off"
+            >
+
+            <button
+              type="submit"
+              aria-label="Search deals"
+            >
+              →
+            </button>
+
+          </form>
+
+
+          <select
+            class="deal-sort"
+            id="dealSort"
+            aria-label="Sort deals"
+          >
+
+            <option value="featured">
+              Sort: Featured
+            </option>
+
+            <option value="discount-high">
+              Highest Discount
+            </option>
+
+            <option value="price-low">
+              Price: Low to High
+            </option>
+
+            <option value="price-high">
+              Price: High to Low
+            </option>
+
+          </select>
 
         </div>
 
 
-        <select
-          id="sortDeals"
-          class="sort-select"
-          aria-label="Sort deals"
-        >
-          <option value="default">
-            Sort: Featured
-          </option>
-
-          <option value="discount">
-            Biggest Discount
-          </option>
-
-          <option value="price-low">
-            Price: Low to High
-          </option>
-
-          <option value="price-high">
-            Price: High to Low
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <!-- Category Filters -->
-
-      <div class="category-filters">
-
-        <button
-          class="filter-btn active"
-          data-category="all"
-          type="button"
-        >
-          All Deals
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="electronics"
-          type="button"
-        >
-          Electronics
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="fashion"
-          type="button"
-        >
-          Fashion
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="home"
-          type="button"
-        >
-          Home & Kitchen
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="beauty"
-          type="button"
-        >
-          Beauty
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="sports"
-          type="button"
-        >
-          Sports
-        </button>
-
-        <button
-          class="filter-btn"
-          data-category="grocery"
-          type="button"
-        >
-          Grocery
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       ALL DEALS
-  ========================== -->
-
-  <main class="all-deals-section">
-
-    <div class="container">
-
-      <div class="results-row">
-
-        <p class="results-count">
-          Showing
-          <strong id="resultsCount">8</strong>
-          deals
-        </p>
-
-      </div>
-
-
-      <div
-        class="deal-grid-wide"
-        id="dealsGrid"
-      >
-
-        <!-- =================================
-             DEAL 1
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="electronics"
-          data-name="Wireless Headphones"
-          data-price="64.99"
-          data-discount="35"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              35% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              🎧
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Electronics
-            </span>
-
-            <h3>
-              Wireless Headphones
-            </h3>
-
-            <p class="deal-description">
-              Premium wireless headphones with
-              noise cancellation.
-            </p>
-
-            <div class="deal-price">
-              <strong>$64.99</strong>
-              <del>$99.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 2
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="fashion"
-          data-name="Running Sneakers"
-          data-price="49.99"
-          data-discount="50"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              50% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              👟
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Fashion
-            </span>
-
-            <h3>
-              Running Sneakers
-            </h3>
-
-            <p class="deal-description">
-              Comfortable and stylish sneakers
-              for everyday use.
-            </p>
-
-            <div class="deal-price">
-              <strong>$49.99</strong>
-              <del>$99.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 3
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="home"
-          data-name="Smart Coffee Maker"
-          data-price="59.99"
-          data-discount="40"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              40% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              ☕
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Home & Kitchen
-            </span>
-
-            <h3>
-              Smart Coffee Maker
-            </h3>
-
-            <p class="deal-description">
-              Make your favorite coffee with
-              one simple touch.
-            </p>
-
-            <div class="deal-price">
-              <strong>$59.99</strong>
-              <del>$99.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 4
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="electronics"
-          data-name="Smart Watch"
-          data-price="69.99"
-          data-discount="30"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              30% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              ⌚
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Electronics
-            </span>
-
-            <h3>
-              Smart Watch
-            </h3>
-
-            <p class="deal-description">
-              Track your fitness and stay
-              connected all day.
-            </p>
-
-            <div class="deal-price">
-              <strong>$69.99</strong>
-              <del>$99.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 5
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="beauty"
-          data-name="Skincare Set"
-          data-price="29.99"
-          data-discount="45"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              45% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              🧴
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Beauty
-            </span>
-
-            <h3>
-              Premium Skincare Set
-            </h3>
-
-            <p class="deal-description">
-              Complete skincare essentials
-              for your daily routine.
-            </p>
-
-            <div class="deal-price">
-              <strong>$29.99</strong>
-              <del>$54.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 6
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="sports"
-          data-name="Fitness Kit"
-          data-price="39.99"
-          data-discount="38"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              38% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              🏋️
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Sports
-            </span>
-
-            <h3>
-              Home Fitness Kit
-            </h3>
-
-            <p class="deal-description">
-              Essential fitness equipment
-              for home workouts.
-            </p>
-
-            <div class="deal-price">
-              <strong>$39.99</strong>
-              <del>$64.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 7
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="grocery"
-          data-name="Organic Grocery Box"
-          data-price="24.99"
-          data-discount="25"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              25% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              🛒
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Grocery
-            </span>
-
-            <h3>
-              Organic Grocery Box
-            </h3>
-
-            <p class="deal-description">
-              A selection of everyday organic
-              grocery essentials.
-            </p>
-
-            <div class="deal-price">
-              <strong>$24.99</strong>
-              <del>$32.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             DEAL 8
-        ================================== -->
-
-        <article
-          class="deal-card"
-          data-category="electronics"
-          data-name="Bluetooth Speaker"
-          data-price="34.99"
-          data-discount="42"
-        >
-
-          <div class="deal-image">
-
-            <span class="discount-badge">
-              42% OFF
-            </span>
-
-            <button
-              class="wishlist-btn"
-              type="button"
-              aria-label="Add to favorites"
-            >
-              ♡
-            </button>
-
-            <div class="product-placeholder">
-              🔊
-            </div>
-
-          </div>
-
-          <div class="deal-content">
-
-            <span class="deal-category">
-              Electronics
-            </span>
-
-            <h3>
-              Bluetooth Speaker
-            </h3>
-
-            <p class="deal-description">
-              Portable speaker with powerful
-              sound and long battery life.
-            </p>
-
-            <div class="deal-price">
-              <strong>$34.99</strong>
-              <del>$59.99</del>
-            </div>
-
-            <a
-              href="deal.html"
-              class="deal-button"
-            >
-              Get Deal
-            </a>
-
-          </div>
-
-        </article>
-
-
-        <!-- =================================
-             EMPTY STATE
-        ================================== -->
+        <!-- Filters -->
+
+        <div class="deal-filters">
+
+          <button
+            class="filter-btn active"
+            data-filter="all"
+            type="button"
+          >
+            All Deals
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="electronics"
+            type="button"
+          >
+            Electronics
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="fashion"
+            type="button"
+          >
+            Fashion
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="home"
+            type="button"
+          >
+            Home & Kitchen
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="beauty"
+            type="button"
+          >
+            Beauty
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="sports"
+            type="button"
+          >
+            Sports
+          </button>
+
+          <button
+            class="filter-btn"
+            data-filter="travel"
+            type="button"
+          >
+            Travel
+          </button>
+
+        </div>
+
+
+        <!-- Results -->
+
+        <div class="results-info">
+
+          <h2>
+            Latest Deals
+          </h2>
+
+          <span id="dealCount">
+            12 deals available
+          </span>
+
+        </div>
+
+
+        <!-- Deal Grid -->
 
         <div
-          class="empty-state"
-          id="emptyState"
+          class="deal-grid"
+          id="dealsGrid"
         >
 
-          <div class="empty-icon">
+
+          <!-- DEAL 1 -->
+
+          <article
+            class="deal-card"
+            data-category="electronics"
+            data-discount="35"
+            data-price="64.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                35% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                🎧
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  🛒
+                </span>
+                Tech Store
+              </div>
+
+              <span class="deal-category">
+                Electronics
+              </span>
+
+              <h3>
+                Wireless Noise Cancelling Headphones
+              </h3>
+
+              <p class="deal-description">
+                Premium wireless headphones with
+                powerful sound and noise cancellation.
+              </p>
+
+              <div class="deal-price">
+                <strong>$64.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Dec 31, 2026</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 2 -->
+
+          <article
+            class="deal-card"
+            data-category="fashion"
+            data-discount="50"
+            data-price="49.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                50% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                👟
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  👟
+                </span>
+                Fashion Store
+              </div>
+
+              <span class="deal-category">
+                Fashion
+              </span>
+
+              <h3>
+                Premium Running Sneakers
+              </h3>
+
+              <p class="deal-description">
+                Lightweight and comfortable sneakers
+                for everyday running.
+              </p>
+
+              <div class="deal-price">
+                <strong>$49.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Dec 28, 2026</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 3 -->
+
+          <article
+            class="deal-card"
+            data-category="home"
+            data-discount="40"
+            data-price="59.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                40% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                ☕
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  🏠
+                </span>
+                Home Store
+              </div>
+
+              <span class="deal-category">
+                Home & Kitchen
+              </span>
+
+              <h3>
+                Smart Coffee Maker
+              </h3>
+
+              <p class="deal-description">
+                Brew your favorite coffee with
+                one simple touch.
+              </p>
+
+              <div class="deal-price">
+                <strong>$59.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 05, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 4 -->
+
+          <article
+            class="deal-card"
+            data-category="electronics"
+            data-discount="30"
+            data-price="69.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                30% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                ⌚
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  ⌚
+                </span>
+                Smart Store
+              </div>
+
+              <span class="deal-category">
+                Electronics
+              </span>
+
+              <h3>
+                Smart Fitness Watch
+              </h3>
+
+              <p class="deal-description">
+                Track your fitness, heart rate
+                and daily activity.
+              </p>
+
+              <div class="deal-price">
+                <strong>$69.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Dec 30, 2026</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 5 -->
+
+          <article
+            class="deal-card"
+            data-category="beauty"
+            data-discount="25"
+            data-price="29.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                25% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                💄
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  💄
+                </span>
+                Beauty Store
+              </div>
+
+              <span class="deal-category">
+                Beauty
+              </span>
+
+              <h3>
+                Premium Beauty Collection
+              </h3>
+
+              <p class="deal-description">
+                Discover a collection of popular
+                beauty and skincare products.
+              </p>
+
+              <div class="deal-price">
+                <strong>$29.99</strong>
+                <del>$39.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 10, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 6 -->
+
+          <article
+            class="deal-card"
+            data-category="sports"
+            data-discount="45"
+            data-price="54.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                45% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                🏋️
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  🏆
+                </span>
+                Sports Store
+              </div>
+
+              <span class="deal-category">
+                Sports
+              </span>
+
+              <h3>
+                Home Fitness Equipment
+              </h3>
+
+              <p class="deal-description">
+                Upgrade your home workout with
+                quality fitness equipment.
+              </p>
+
+              <div class="deal-price">
+                <strong>$54.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Dec 29, 2026</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 7 -->
+
+          <article
+            class="deal-card"
+            data-category="travel"
+            data-discount="20"
+            data-price="79.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                20% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                ✈️
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  ✈️
+                </span>
+                Travel Store
+              </div>
+
+              <span class="deal-category">
+                Travel
+              </span>
+
+              <h3>
+                Weekend Travel Package
+              </h3>
+
+              <p class="deal-description">
+                Save on selected travel packages
+                and holiday experiences.
+              </p>
+
+              <div class="deal-price">
+                <strong>$79.99</strong>
+                <del>$99.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 15, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 8 -->
+
+          <article
+            class="deal-card"
+            data-category="electronics"
+            data-discount="55"
+            data-price="89.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                55% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                💻
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  💻
+                </span>
+                Tech Store
+              </div>
+
+              <span class="deal-category">
+                Electronics
+              </span>
+
+              <h3>
+                Wireless Mechanical Keyboard
+              </h3>
+
+              <p class="deal-description">
+                Upgrade your workspace with a
+                modern wireless keyboard.
+              </p>
+
+              <div class="deal-price">
+                <strong>$89.99</strong>
+                <del>$199.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Dec 27, 2026</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 9 -->
+
+          <article
+            class="deal-card"
+            data-category="fashion"
+            data-discount="35"
+            data-price="39.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                35% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                🧥
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  👗
+                </span>
+                Fashion Store
+              </div>
+
+              <span class="deal-category">
+                Fashion
+              </span>
+
+              <h3>
+                Winter Jacket Collection
+              </h3>
+
+              <p class="deal-description">
+                Stay warm with selected jackets
+                and winter clothing.
+              </p>
+
+              <div class="deal-price">
+                <strong>$39.99</strong>
+                <del>$59.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 02, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 10 -->
+
+          <article
+            class="deal-card"
+            data-category="home"
+            data-discount="30"
+            data-price="34.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                30% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                🛋️
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  🏠
+                </span>
+                Home Store
+              </div>
+
+              <span class="deal-category">
+                Home & Kitchen
+              </span>
+
+              <h3>
+                Modern Home Decor Set
+              </h3>
+
+              <p class="deal-description">
+                Refresh your home with stylish
+                decor and accessories.
+              </p>
+
+              <div class="deal-price">
+                <strong>$34.99</strong>
+                <del>$49.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 08, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 11 -->
+
+          <article
+            class="deal-card"
+            data-category="beauty"
+            data-discount="40"
+            data-price="24.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                40% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                🧴
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  ✨
+                </span>
+                Beauty Store
+              </div>
+
+              <span class="deal-category">
+                Beauty
+              </span>
+
+              <h3>
+                Skincare Essentials Bundle
+              </h3>
+
+              <p class="deal-description">
+                Daily skincare essentials at a
+                special discounted price.
+              </p>
+
+              <div class="deal-price">
+                <strong>$24.99</strong>
+                <del>$41.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 12, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <!-- DEAL 12 -->
+
+          <article
+            class="deal-card"
+            data-category="sports"
+            data-discount="25"
+            data-price="44.99"
+          >
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                25% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
+                ♡
+              </button>
+
+              <div class="product-placeholder">
+                ⚽
+              </div>
+
+            </div>
+
+            <div class="deal-content">
+
+              <div class="deal-store">
+                <span class="deal-store-icon">
+                  🏆
+                </span>
+                Sports Store
+              </div>
+
+              <span class="deal-category">
+                Sports
+              </span>
+
+              <h3>
+                Outdoor Sports Gear
+              </h3>
+
+              <p class="deal-description">
+                Gear up for your next outdoor
+                adventure.
+              </p>
+
+              <div class="deal-price">
+                <strong>$44.99</strong>
+                <del>$59.99</del>
+              </div>
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
+                Get Deal
+              </a>
+
+              <div class="deal-expiry">
+                Ends: <strong>Jan 20, 2027</strong>
+              </div>
+
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <!-- No Results -->
+
+        <div
+          class="no-results"
+          id="noResults"
+        >
+
+          <div class="no-results-icon">
             🔎
           </div>
 
@@ -1042,28 +1524,32 @@
 
       </div>
 
-    </div>
+    </section>
 
   </main>
 
 
-  <!-- =========================
+  <!-- =========================================
        FOOTER
-  ========================== -->
+  ========================================== -->
 
   <footer class="footer">
 
     <div class="container footer-grid">
 
+
       <div class="footer-brand">
 
-        <a href="index.html" class="logo">
+        <a
+          href="index.html"
+          class="logo"
+        >
           Save<span>More</span>
         </a>
 
         <p>
-          Discover the best deals, discounts and
-          offers — all in one place.
+          Discover the best deals, coupons,
+          discounts and offers — all in one place.
         </p>
 
         <div class="social-links">
@@ -1087,14 +1573,41 @@
 
       <div class="footer-column">
 
-        <h3>Explore</h3>
+        <h3>
+          Explore
+        </h3>
 
         <a href="deals.html">
-          All Deals
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
         </a>
 
         <a href="categories.html">
           Categories
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>
+          Company
+        </h3>
+
+        <a href="about.html">
+          About Us
+        </a>
+
+        <a href="contact.html">
+          Contact Us
         </a>
 
         <a href="favorites.html">
@@ -1106,22 +1619,9 @@
 
       <div class="footer-column">
 
-        <h3>Company</h3>
-
-        <a href="about.html">
-          About Us
-        </a>
-
-        <a href="contact.html">
-          Contact Us
-        </a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>Legal</h3>
+        <h3>
+          Legal
+        </h3>
 
         <a href="privacy.html">
           Privacy Policy
@@ -1139,16 +1639,14 @@
     <div class="container footer-bottom">
 
       <p>
-        © <span id="currentYear"></span>
+        ©
+        <span id="currentYear"></span>
         SaveMore. All rights reserved.
       </p>
 
     </div>
 
   </footer>
-
-
-  <script src="script.js"></script>
 
 
   <!-- =========================================
@@ -1159,76 +1657,94 @@
 
     document.addEventListener("DOMContentLoaded", () => {
 
-      const searchInput =
-        document.getElementById("dealSearch");
-
-      const filterButtons =
-        document.querySelectorAll(".filter-btn");
-
-      const sortSelect =
-        document.getElementById("sortDeals");
-
-      const dealsGrid =
-        document.getElementById("dealsGrid");
-
-      const dealCards =
+      const cards =
         Array.from(
-          dealsGrid.querySelectorAll(".deal-card")
+          document.querySelectorAll(
+            "#dealsGrid .deal-card"
+          )
         );
 
-      const resultsCount =
-        document.getElementById("resultsCount");
+      const filterButtons =
+        document.querySelectorAll(
+          ".filter-btn"
+        );
 
-      const emptyState =
-        document.getElementById("emptyState");
+      const searchForm =
+        document.getElementById(
+          "dealSearchForm"
+        );
+
+      const searchInput =
+        document.getElementById(
+          "dealSearchInput"
+        );
+
+      const sortSelect =
+        document.getElementById(
+          "dealSort"
+        );
+
+      const count =
+        document.getElementById(
+          "dealCount"
+        );
+
+      const noResults =
+        document.getElementById(
+          "noResults"
+        );
+
+      const grid =
+        document.getElementById(
+          "dealsGrid"
+        );
 
 
-      let selectedCategory = "all";
+      let activeFilter = "all";
+      let searchTerm = "";
 
 
-      /* =========================================
-         FILTER DEALS
-      ========================================== */
+      function renderDeals() {
 
-      function filterDeals() {
-
-        const searchTerm =
-          searchInput.value
-            .toLowerCase()
-            .trim();
+        let visibleCards = [];
 
 
-        let visibleDeals = [];
-
-
-        dealCards.forEach((card) => {
+        cards.forEach((card) => {
 
           const category =
             card.dataset.category;
 
-          const name =
-            card.dataset.name.toLowerCase();
+          const title =
+            card
+              .querySelector("h3")
+              ?.textContent
+              .toLowerCase() || "";
+
+          const store =
+            card
+              .querySelector(".deal-store")
+              ?.textContent
+              .toLowerCase() || "";
+
+          const matchesFilter =
+            activeFilter === "all" ||
+            category === activeFilter;
+
+          const matchesSearch =
+            !searchTerm ||
+            title.includes(searchTerm) ||
+            store.includes(searchTerm) ||
+            category.includes(searchTerm);
 
 
-          const categoryMatch =
-            selectedCategory === "all" ||
-            category === selectedCategory;
-
-
-          const searchMatch =
-            name.includes(searchTerm);
-
-
-          const shouldShow =
-            categoryMatch &&
-            searchMatch;
-
-
-          if (shouldShow) {
+          if (
+            matchesFilter &&
+            matchesSearch
+          ) {
 
             card.classList.remove("hidden");
 
-            visibleDeals.push(card);
+            visibleCards.push(card);
 
           } else {
 
@@ -1239,97 +1755,151 @@
         });
 
 
-        resultsCount.textContent =
-          visibleDeals.length;
+        count.textContent =
+          `${visibleCards.length} deal${
+            visibleCards.length !== 1
+              ? "s"
+              : ""
+          } available`;
 
 
-        if (visibleDeals.length === 0) {
-          emptyState.classList.add("show");
-        } else {
-          emptyState.classList.remove("show");
-        }
+        noResults.classList.toggle(
+          "show",
+          visibleCards.length === 0
+        );
 
       }
 
 
-      /* =========================================
-         CATEGORY BUTTONS
-      ========================================== */
+      /* =====================================
+         FILTER BUTTONS
+      ====================================== */
 
       filterButtons.forEach((button) => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener(
+          "click",
+          () => {
 
-          filterButtons.forEach((btn) => {
-            btn.classList.remove("active");
-          });
+            filterButtons.forEach(
+              (item) => {
+                item.classList.remove(
+                  "active"
+                );
+              }
+            );
 
+            button.classList.add("active");
 
-          button.classList.add("active");
+            activeFilter =
+              button.dataset.filter;
 
+            renderDeals();
 
-          selectedCategory =
-            button.dataset.category;
-
-
-          filterDeals();
-
-        });
+          }
+        );
 
       });
 
 
-      /* =========================================
+      /* =====================================
          SEARCH
-      ========================================== */
+      ====================================== */
 
-      searchInput.addEventListener(
-        "input",
-        filterDeals
+      searchForm.addEventListener(
+        "submit",
+        (event) => {
+
+          event.preventDefault();
+
+          searchTerm =
+            searchInput.value
+              .trim()
+              .toLowerCase();
+
+          renderDeals();
+
+        }
       );
 
 
-      /* =========================================
+      searchInput.addEventListener(
+        "input",
+        () => {
+
+          searchTerm =
+            searchInput.value
+              .trim()
+              .toLowerCase();
+
+          renderDeals();
+
+        }
+      );
+
+
+      /* =====================================
          SORT
-      ========================================== */
+      ====================================== */
 
       sortSelect.addEventListener(
         "change",
         () => {
 
-          const sortValue =
+          const value =
             sortSelect.value;
 
 
-          const sortedCards =
-            [...dealCards].sort(
+          const sorted =
+            [...cards].sort(
               (a, b) => {
 
-                if (sortValue === "discount") {
+                if (
+                  value ===
+                  "discount-high"
+                ) {
 
                   return (
-                    Number(b.dataset.discount) -
-                    Number(a.dataset.discount)
+                    Number(
+                      b.dataset.discount
+                    ) -
+                    Number(
+                      a.dataset.discount
+                    )
                   );
 
                 }
 
 
-                if (sortValue === "price-low") {
+                if (
+                  value ===
+                  "price-low"
+                ) {
 
                   return (
-                    Number(a.dataset.price) -
-                    Number(b.dataset.price)
+                    Number(
+                      a.dataset.price
+                    ) -
+                    Number(
+                      b.dataset.price
+                    )
                   );
 
                 }
 
 
-                if (sortValue === "price-high") {
+                if (
+                  value ===
+                  "price-high"
+                ) {
 
                   return (
-                    Number(b.dataset.price) -
-                    Number(a.dataset.price)
+                    Number(
+                      b.dataset.price
+                    ) -
+                    Number(
+                      a.dataset.price
+                    )
                   );
 
                 }
@@ -1341,66 +1911,27 @@
             );
 
 
-          sortedCards.forEach((card) => {
-            dealsGrid.appendChild(card);
+          sorted.forEach((card) => {
+            grid.appendChild(card);
           });
 
 
-          dealsGrid.appendChild(emptyState);
-
-          filterDeals();
-
-        });
-
-      });
-
-
-      /* =========================================
-         URL CATEGORY SUPPORT
-         
-         Example:
-         deals.html?category=electronics
-      ========================================== */
-
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      const urlCategory =
-        params.get("category");
-
-
-      if (urlCategory) {
-
-        const matchingButton =
-          document.querySelector(
-            `.filter-btn[data-category="${urlCategory}"]`
-          );
-
-
-        if (matchingButton) {
-
-          filterButtons.forEach((btn) => {
-            btn.classList.remove("active");
-          });
-
-
-          matchingButton.classList.add("active");
-
-          selectedCategory =
-            urlCategory;
+          renderDeals();
 
         }
+      );
 
-      }
 
-
-      filterDeals();
+      renderDeals();
 
     });
 
   </script>
+
+
+  <!-- Main JavaScript -->
+
+  <script src="script.js"></script>
 
 </body>
 </html>
