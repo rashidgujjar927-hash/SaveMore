@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>SaveMore — Best Deals & Discounts</title>
+  <title>SaveMore — Deals, Coupons & Offers</title>
+
   <meta
     name="description"
-    content="SaveMore helps you discover the best deals, discounts and offers."
+    content="SaveMore helps you discover the best deals, coupons, discounts and offers from popular stores."
   >
 
   <link rel="stylesheet" href="style.css">
@@ -15,307 +16,660 @@
 
 <body>
 
-  <!-- =========================
+  <!-- =========================================
        HEADER
-  ========================== -->
+  ========================================== -->
+
   <header class="header">
+
     <div class="container header-container">
+
+      <!-- Logo -->
 
       <a href="index.html" class="logo">
         Save<span>More</span>
       </a>
 
+
+      <!-- Navigation -->
+
       <nav class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <a href="deals.html">Deals</a>
-        <a href="categories.html">Categories</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
+
+        <a href="index.html" class="active">
+          Home
+        </a>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
       </nav>
 
+
+      <!-- Header Actions -->
+
       <div class="header-actions">
-        <button class="search-btn" type="button" aria-label="Search">
+
+        <button
+          class="search-btn"
+          type="button"
+          aria-label="Search"
+        >
           🔍
         </button>
 
-        <a href="favorites.html" class="favorites-btn">
+        <a
+          href="favorites.html"
+          class="favorites-btn"
+          aria-label="Favorites"
+        >
           ♡
         </a>
 
-        <button class="menu-btn" type="button" aria-label="Open menu">
+        <button
+          class="menu-btn"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
           ☰
         </button>
+
       </div>
 
     </div>
+
   </header>
 
 
-  <!-- =========================
-       HERO SECTION
-  ========================== -->
+  <!-- =========================================
+       HERO
+  ========================================== -->
+
   <main>
 
     <section class="hero">
+
       <div class="container hero-container">
 
+
+        <!-- Hero Content -->
+
         <div class="hero-content">
-          <span class="hero-badge">🔥 Hot Deals Every Day</span>
+
+          <span class="hero-badge">
+            🔥 Hot Deals & Coupons Every Day
+          </span>
 
           <h1>
-            Discover Deals.
-            <span>Save More.</span>
+            Save More.
+            <span>Spend Less.</span>
           </h1>
 
           <p>
-            Find amazing discounts, exclusive offers and the best deals
-            from your favorite stores — all in one place.
+            Discover the best deals, discount coupons,
+            offers and savings from your favorite stores —
+            all in one place.
           </p>
 
+
           <div class="hero-buttons">
-            <a href="deals.html" class="btn btn-primary">
+
+            <a
+              href="deals.html"
+              class="btn btn-primary"
+            >
               Explore Deals →
             </a>
 
-            <a href="categories.html" class="btn btn-secondary">
-              Browse Categories
+            <a
+              href="coupons.html"
+              class="btn btn-secondary"
+            >
+              Find Coupons
             </a>
+
           </div>
+
         </div>
 
+
+        <!-- Hero Deal -->
+
         <div class="hero-card">
-          <div class="hero-card-label">Deal of the Day</div>
+
+          <div class="hero-card-label">
+            🔥 Deal of the Day
+          </div>
+
 
           <div class="hero-product-image">
-            <span>🔥</span>
+            🛍️
           </div>
+
 
           <div class="hero-card-content">
-            <h3>Today's Special Offer</h3>
+
+            <h3>
+              Today's Special Offer
+            </h3>
+
 
             <div class="price-row">
-              <strong>$49.99</strong>
-              <del>$89.99</del>
-              <span>44% OFF</span>
+
+              <strong>
+                $49.99
+              </strong>
+
+              <del>
+                $89.99
+              </del>
+
+              <span>
+                44% OFF
+              </span>
+
             </div>
 
-            <a href="deal.html" class="deal-link">
+
+            <a
+              href="deal.html"
+              class="deal-link"
+            >
               View Deal →
             </a>
+
           </div>
+
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
-         CATEGORIES
-    ========================== -->
+    <!-- =========================================
+         QUICK LINKS
+    ========================================== -->
+
     <section class="categories-section">
+
       <div class="container">
 
         <div class="section-heading">
+
           <div>
-            <span class="section-label">Explore</span>
-            <h2>Shop by Category</h2>
+
+            <span class="section-label">
+              SaveMore
+            </span>
+
+            <h2>
+              What Are You Looking For?
+            </h2>
+
           </div>
 
-          <a href="categories.html" class="view-all">
-            View All →
-          </a>
         </div>
+
 
         <div class="category-grid">
 
-          <a href="deals.html?category=electronics" class="category-card">
-            <div class="category-icon">📱</div>
-            <h3>Electronics</h3>
-            <p>120+ Deals</p>
+
+          <a
+            href="deals.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              🔥
+            </div>
+
+            <h3>
+              Deals
+            </h3>
+
+            <p>
+              Latest Offers
+            </p>
+
           </a>
 
-          <a href="deals.html?category=fashion" class="category-card">
-            <div class="category-icon">👕</div>
-            <h3>Fashion</h3>
-            <p>250+ Deals</p>
+
+          <a
+            href="coupons.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              🎟️
+            </div>
+
+            <h3>
+              Coupons
+            </h3>
+
+            <p>
+              Save With Codes
+            </p>
+
           </a>
 
-          <a href="deals.html?category=home" class="category-card">
-            <div class="category-icon">🏠</div>
-            <h3>Home & Kitchen</h3>
-            <p>180+ Deals</p>
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              🏪
+            </div>
+
+            <h3>
+              Stores
+            </h3>
+
+            <p>
+              Popular Stores
+            </p>
+
           </a>
 
-          <a href="deals.html?category=beauty" class="category-card">
-            <div class="category-icon">💄</div>
-            <h3>Beauty</h3>
-            <p>90+ Deals</p>
+
+          <a
+            href="categories.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              📂
+            </div>
+
+            <h3>
+              Categories
+            </h3>
+
+            <p>
+              Browse Categories
+            </p>
+
           </a>
 
-          <a href="deals.html?category=sports" class="category-card">
-            <div class="category-icon">⚽</div>
-            <h3>Sports</h3>
-            <p>75+ Deals</p>
+
+          <a
+            href="favorites.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              ❤️
+            </div>
+
+            <h3>
+              Favorites
+            </h3>
+
+            <p>
+              Saved Deals
+            </p>
+
           </a>
 
-          <a href="deals.html?category=grocery" class="category-card">
-            <div class="category-icon">🛒</div>
-            <h3>Grocery</h3>
-            <p>140+ Deals</p>
+
+          <a
+            href="contact.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              💬
+            </div>
+
+            <h3>
+              Contact
+            </h3>
+
+            <p>
+              Get In Touch
+            </p>
+
           </a>
 
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          BEST DEALS
-    ========================== -->
+    ========================================== -->
+
     <section class="deals-section">
+
       <div class="container">
 
+
         <div class="section-heading">
+
           <div>
-            <span class="section-label">Don't Miss Out</span>
-            <h2>Today's Best Deals</h2>
+
+            <span class="section-label">
+              Don't Miss Out
+            </span>
+
+            <h2>
+              Today's Best Deals
+            </h2>
+
           </div>
 
-          <a href="deals.html" class="view-all">
+
+          <a
+            href="deals.html"
+            class="view-all"
+          >
             View All Deals →
           </a>
+
         </div>
+
 
         <div class="deal-grid">
 
-          <!-- Deal 1 -->
-          <article class="deal-card">
+
+          <!-- DEAL 1 -->
+
+          <article
+            class="deal-card"
+            data-category="electronics"
+          >
 
             <div class="deal-image">
-              <span class="discount-badge">35% OFF</span>
-              <button class="wishlist-btn" type="button">
+
+              <span class="discount-badge">
+                35% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
                 ♡
               </button>
-              <div class="product-placeholder">🎧</div>
-            </div>
 
-            <div class="deal-content">
-              <span class="deal-category">Electronics</span>
-
-              <h3>Wireless Headphones</h3>
-
-              <p class="deal-description">
-                Premium wireless headphones with noise cancellation.
-              </p>
-
-              <div class="deal-price">
-                <strong>$64.99</strong>
-                <del>$99.99</del>
+              <div class="product-placeholder">
+                🎧
               </div>
 
-              <a href="deal.html" class="deal-button">
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Electronics
+              </span>
+
+              <h3>
+                Wireless Headphones
+              </h3>
+
+              <p class="deal-description">
+                Premium wireless headphones with
+                noise cancellation.
+              </p>
+
+
+              <div class="deal-price">
+
+                <strong>
+                  $64.99
+                </strong>
+
+                <del>
+                  $99.99
+                </del>
+
+              </div>
+
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
                 Get Deal
               </a>
+
             </div>
 
           </article>
 
 
-          <!-- Deal 2 -->
-          <article class="deal-card">
+          <!-- DEAL 2 -->
+
+          <article
+            class="deal-card"
+            data-category="fashion"
+          >
 
             <div class="deal-image">
-              <span class="discount-badge">50% OFF</span>
-              <button class="wishlist-btn" type="button">
+
+              <span class="discount-badge">
+                50% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
                 ♡
               </button>
-              <div class="product-placeholder">👟</div>
-            </div>
 
-            <div class="deal-content">
-              <span class="deal-category">Fashion</span>
-
-              <h3>Running Sneakers</h3>
-
-              <p class="deal-description">
-                Comfortable and stylish sneakers for everyday use.
-              </p>
-
-              <div class="deal-price">
-                <strong>$49.99</strong>
-                <del>$99.99</del>
+              <div class="product-placeholder">
+                👟
               </div>
 
-              <a href="deal.html" class="deal-button">
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Fashion
+              </span>
+
+              <h3>
+                Running Sneakers
+              </h3>
+
+              <p class="deal-description">
+                Comfortable and stylish sneakers
+                for everyday use.
+              </p>
+
+
+              <div class="deal-price">
+
+                <strong>
+                  $49.99
+                </strong>
+
+                <del>
+                  $99.99
+                </del>
+
+              </div>
+
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
                 Get Deal
               </a>
+
             </div>
 
           </article>
 
 
-          <!-- Deal 3 -->
-          <article class="deal-card">
+          <!-- DEAL 3 -->
+
+          <article
+            class="deal-card"
+            data-category="home"
+          >
 
             <div class="deal-image">
-              <span class="discount-badge">40% OFF</span>
-              <button class="wishlist-btn" type="button">
+
+              <span class="discount-badge">
+                40% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
                 ♡
               </button>
-              <div class="product-placeholder">☕</div>
-            </div>
 
-            <div class="deal-content">
-              <span class="deal-category">Home & Kitchen</span>
-
-              <h3>Smart Coffee Maker</h3>
-
-              <p class="deal-description">
-                Make your favorite coffee with one simple touch.
-              </p>
-
-              <div class="deal-price">
-                <strong>$59.99</strong>
-                <del>$99.99</del>
+              <div class="product-placeholder">
+                ☕
               </div>
 
-              <a href="deal.html" class="deal-button">
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Home & Kitchen
+              </span>
+
+              <h3>
+                Smart Coffee Maker
+              </h3>
+
+              <p class="deal-description">
+                Make your favorite coffee with
+                one simple touch.
+              </p>
+
+
+              <div class="deal-price">
+
+                <strong>
+                  $59.99
+                </strong>
+
+                <del>
+                  $99.99
+                </del>
+
+              </div>
+
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
                 Get Deal
               </a>
+
             </div>
 
           </article>
 
 
-          <!-- Deal 4 -->
-          <article class="deal-card">
+          <!-- DEAL 4 -->
+
+          <article
+            class="deal-card"
+            data-category="electronics"
+          >
 
             <div class="deal-image">
-              <span class="discount-badge">30% OFF</span>
-              <button class="wishlist-btn" type="button">
+
+              <span class="discount-badge">
+                30% OFF
+              </span>
+
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to favorites"
+              >
                 ♡
               </button>
-              <div class="product-placeholder">⌚</div>
-            </div>
 
-            <div class="deal-content">
-              <span class="deal-category">Electronics</span>
-
-              <h3>Smart Watch</h3>
-
-              <p class="deal-description">
-                Track your fitness and stay connected all day.
-              </p>
-
-              <div class="deal-price">
-                <strong>$69.99</strong>
-                <del>$99.99</del>
+              <div class="product-placeholder">
+                ⌚
               </div>
 
-              <a href="deal.html" class="deal-button">
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Electronics
+              </span>
+
+              <h3>
+                Smart Watch
+              </h3>
+
+              <p class="deal-description">
+                Track your fitness and stay
+                connected all day.
+              </p>
+
+
+              <div class="deal-price">
+
+                <strong>
+                  $69.99
+                </strong>
+
+                <del>
+                  $99.99
+                </del>
+
+              </div>
+
+
+              <a
+                href="deal.html"
+                class="deal-button"
+              >
                 Get Deal
               </a>
+
             </div>
 
           </article>
@@ -323,73 +677,517 @@
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
-         WHY SAVEMORE
-    ========================== -->
-    <section class="why-section">
+    <!-- =========================================
+         POPULAR COUPONS
+    ========================================== -->
+
+    <section class="categories-section">
+
       <div class="container">
 
-        <div class="section-heading centered">
-          <span class="section-label">Why SaveMore?</span>
-          <h2>Save Time. Save Money.</h2>
-          <p>
-            We make it easier to discover great deals without wasting
-            hours searching across different websites.
-          </p>
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-label">
+              Save With Coupons
+            </span>
+
+            <h2>
+              Popular Coupons
+            </h2>
+
+          </div>
+
+
+          <a
+            href="coupons.html"
+            class="view-all"
+          >
+            View All Coupons →
+          </a>
+
         </div>
+
+
+        <div class="deal-grid">
+
+
+          <!-- COUPON 1 -->
+
+          <article class="deal-card">
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                20% OFF
+              </span>
+
+              <div class="product-placeholder">
+                🎟️
+              </div>
+
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Fashion Store
+              </span>
+
+              <h3>
+                20% Off Your Order
+              </h3>
+
+              <p class="deal-description">
+                Use the coupon code at checkout
+                to get your discount.
+              </p>
+
+
+              <a
+                href="coupons.html"
+                class="deal-button"
+              >
+                Get Coupon
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- COUPON 2 -->
+
+          <article class="deal-card">
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                $15 OFF
+              </span>
+
+              <div class="product-placeholder">
+                🏷️
+              </div>
+
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Electronics Store
+              </span>
+
+              <h3>
+                $15 Off Electronics
+              </h3>
+
+              <p class="deal-description">
+                Save money on selected electronics
+                with this coupon.
+              </p>
+
+
+              <a
+                href="coupons.html"
+                class="deal-button"
+              >
+                Get Coupon
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- COUPON 3 -->
+
+          <article class="deal-card">
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                15% OFF
+              </span>
+
+              <div class="product-placeholder">
+                🛍️
+              </div>
+
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Home Store
+              </span>
+
+              <h3>
+                15% Off Home Items
+              </h3>
+
+              <p class="deal-description">
+                Get extra savings on selected
+                home products.
+              </p>
+
+
+              <a
+                href="coupons.html"
+                class="deal-button"
+              >
+                Get Coupon
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- COUPON 4 -->
+
+          <article class="deal-card">
+
+            <div class="deal-image">
+
+              <span class="discount-badge">
+                25% OFF
+              </span>
+
+              <div class="product-placeholder">
+                💄
+              </div>
+
+            </div>
+
+
+            <div class="deal-content">
+
+              <span class="deal-category">
+                Beauty Store
+              </span>
+
+              <h3>
+                25% Off Beauty
+              </h3>
+
+              <p class="deal-description">
+                Save on your favorite beauty
+                products today.
+              </p>
+
+
+              <a
+                href="coupons.html"
+                class="deal-button"
+              >
+                Get Coupon
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         POPULAR STORES
+    ========================================== -->
+
+    <section class="deals-section">
+
+      <div class="container">
+
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-label">
+              Shop Your Favorites
+            </span>
+
+            <h2>
+              Popular Stores
+            </h2>
+
+          </div>
+
+
+          <a
+            href="stores.html"
+            class="view-all"
+          >
+            View All Stores →
+          </a>
+
+        </div>
+
+
+        <div class="category-grid">
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              🛒
+            </div>
+
+            <h3>
+              Amazon
+            </h3>
+
+            <p>
+              120+ Deals
+            </p>
+
+          </a>
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              👟
+            </div>
+
+            <h3>
+              Nike
+            </h3>
+
+            <p>
+              45+ Deals
+            </p>
+
+          </a>
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              💻
+            </div>
+
+            <h3>
+              Best Buy
+            </h3>
+
+            <p>
+              80+ Deals
+            </p>
+
+          </a>
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              👗
+            </div>
+
+            <h3>
+              Fashion Store
+            </h3>
+
+            <p>
+              95+ Deals
+            </p>
+
+          </a>
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              🏠
+            </div>
+
+            <h3>
+              Home Store
+            </h3>
+
+            <p>
+              65+ Deals
+            </p>
+
+          </a>
+
+
+          <a
+            href="stores.html"
+            class="category-card"
+          >
+
+            <div class="category-icon">
+              💄
+            </div>
+
+            <h3>
+              Beauty Store
+            </h3>
+
+            <p>
+              55+ Deals
+            </p>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         WHY SAVEMORE
+    ========================================== -->
+
+    <section class="why-section">
+
+      <div class="container">
+
+
+        <div class="section-heading centered">
+
+          <span class="section-label">
+            Why SaveMore?
+          </span>
+
+          <h2>
+            Everything You Need to Save
+          </h2>
+
+          <p>
+            We bring deals, coupons and stores together
+            so you can find savings faster.
+          </p>
+
+        </div>
+
 
         <div class="features-grid">
 
-          <div class="feature-card">
-            <div class="feature-icon">🔎</div>
-            <h3>Find Great Deals</h3>
-            <p>
-              Discover useful deals and offers from different categories.
-            </p>
-          </div>
 
           <div class="feature-card">
-            <div class="feature-icon">💰</div>
-            <h3>Save More Money</h3>
+
+            <div class="feature-icon">
+              🔎
+            </div>
+
+            <h3>
+              Find Great Deals
+            </h3>
+
             <p>
-              Compare prices and discover discounts that help you save.
+              Discover useful deals and offers
+              from different categories.
             </p>
+
           </div>
 
+
           <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>Quick & Easy</h3>
+
+            <div class="feature-icon">
+              🎟️
+            </div>
+
+            <h3>
+              Use Coupons
+            </h3>
+
             <p>
-              Everything you need is organized in one simple place.
+              Find discount codes and coupons
+              to save even more.
             </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">
+              💰
+            </div>
+
+            <h3>
+              Save More Money
+            </h3>
+
+            <p>
+              Compare offers and discover
+              discounts that help you save.
+            </p>
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
+    <!-- =========================================
          NEWSLETTER
-    ========================== -->
+    ========================================== -->
+
     <section class="newsletter-section">
+
       <div class="container newsletter-container">
 
-        <div class="newsletter-content">
-          <span class="section-label">Stay Updated</span>
 
-          <h2>Never Miss a Great Deal</h2>
+        <div class="newsletter-content">
+
+          <span class="section-label">
+            Stay Updated
+          </span>
+
+          <h2>
+            Never Miss a Great Deal
+          </h2>
 
           <p>
-            Subscribe to receive the latest deals and exclusive offers.
+            Subscribe to receive the latest deals,
+            coupons and exclusive offers.
           </p>
+
         </div>
 
-        <form class="newsletter-form" id="newsletterForm">
+
+        <form
+          class="newsletter-form"
+          id="newsletterForm"
+        >
 
           <input
             type="email"
@@ -399,75 +1197,161 @@
             required
           >
 
-          <button type="submit" class="btn btn-primary">
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
             Subscribe
           </button>
 
         </form>
 
       </div>
+
     </section>
 
   </main>
 
 
-  <!-- =========================
+  <!-- =========================================
        FOOTER
-  ========================== -->
+  ========================================== -->
+
   <footer class="footer">
 
     <div class="container footer-grid">
 
+
+      <!-- Brand -->
+
       <div class="footer-brand">
-        <a href="index.html" class="logo">
+
+        <a
+          href="index.html"
+          class="logo"
+        >
           Save<span>More</span>
         </a>
 
         <p>
-          Discover the best deals, discounts and offers —
-          all in one place.
+          Discover the best deals, coupons,
+          discounts and offers — all in one place.
         </p>
 
+
         <div class="social-links">
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Instagram">◎</a>
-          <a href="#" aria-label="X">𝕏</a>
+
+          <a
+            href="#"
+            aria-label="Facebook"
+          >
+            f
+          </a>
+
+          <a
+            href="#"
+            aria-label="Instagram"
+          >
+            ◎
+          </a>
+
+          <a
+            href="#"
+            aria-label="X"
+          >
+            𝕏
+          </a>
+
         </div>
+
       </div>
 
 
+      <!-- Explore -->
+
       <div class="footer-column">
-        <h3>Explore</h3>
-        <a href="deals.html">All Deals</a>
-        <a href="categories.html">Categories</a>
-        <a href="favorites.html">Favorites</a>
+
+        <h3>
+          Explore
+        </h3>
+
+        <a href="deals.html">
+          Deals
+        </a>
+
+        <a href="coupons.html">
+          Coupons
+        </a>
+
+        <a href="stores.html">
+          Stores
+        </a>
+
+        <a href="categories.html">
+          Categories
+        </a>
+
       </div>
 
 
+      <!-- Company -->
+
       <div class="footer-column">
-        <h3>Company</h3>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact Us</a>
+
+        <h3>
+          Company
+        </h3>
+
+        <a href="about.html">
+          About Us
+        </a>
+
+        <a href="contact.html">
+          Contact Us
+        </a>
+
+        <a href="favorites.html">
+          Favorites
+        </a>
+
       </div>
 
 
+      <!-- Legal -->
+
       <div class="footer-column">
-        <h3>Legal</h3>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms & Conditions</a>
+
+        <h3>
+          Legal
+        </h3>
+
+        <a href="privacy.html">
+          Privacy Policy
+        </a>
+
+        <a href="terms.html">
+          Terms & Conditions
+        </a>
+
       </div>
 
     </div>
 
 
     <div class="container footer-bottom">
+
       <p>
-        © <span id="currentYear"></span> SaveMore. All rights reserved.
+        ©
+        <span id="currentYear"></span>
+        SaveMore. All rights reserved.
       </p>
+
     </div>
 
   </footer>
 
+
+  <!-- JavaScript -->
 
   <script src="script.js"></script>
 
